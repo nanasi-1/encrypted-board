@@ -3,7 +3,7 @@
 /**
  * ArrayBufferをbase64にencodeする
  */
-function arrayBufferToBase64(buffer: ArrayBuffer): string {
+export function arrayBufferToBase64(buffer: ArrayBuffer): string {
   const str = String.fromCharCode.apply(
     null,
     new Uint8Array(buffer) as unknown as number[],
@@ -12,11 +12,12 @@ function arrayBufferToBase64(buffer: ArrayBuffer): string {
   return window.btoa(str);
 }
 
-/**
- * 公開鍵をbase64にencodeする
- */
-async function publicKeyToBase64(publicKey: CryptoKey): Promise<string> {
-  const key = await window.crypto.subtle.exportKey('spki', publicKey);
-
-  return arrayBufferToBase64(key);
+export function base64ToArrayBuffer(base64: string): ArrayBuffer {
+  const str = window.atob(base64)
+  const buf = new ArrayBuffer(str.length)
+  const bufView = new Uint8Array(buf)
+  for (let i = 0, strLen = str.length; i < strLen; i++) {
+    bufView[i] = str.charCodeAt(i)
+  }
+  return buf
 }
