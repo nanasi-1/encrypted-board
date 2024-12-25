@@ -1,7 +1,9 @@
 import { arrayBufferToBase64, base64ToArrayBuffer } from "./arrbuf-b64";
 import { plainTextToArrayBuffer, arrayBufferToPlainText } from "./arrbuf-plain";
 
-const algorithm = { name: 'RSA-OAEP' } as const
+const algorithm = { 
+  name: 'RSA-OAEP' 
+} as const satisfies RsaOaepParams
 
 export async function encrypt(plainText: string, publicKey: CryptoKey): Promise<string> {  
   const textBuf = await plainTextToArrayBuffer(plainText);
