@@ -1,8 +1,5 @@
 // By https://zenn.dev/spacemarket/articles/9357ba7de0c9d3
 
-/**
- * ArrayBufferをbase64にencodeする
- */
 export function arrayBufferToBase64(buffer: ArrayBuffer): string {
   const str = String.fromCharCode.apply(
     null,
