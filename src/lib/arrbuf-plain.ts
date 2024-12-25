@@ -1,7 +1,7 @@
-export async function plainTextToArrayBuffer(plainText: string): Promise<ArrayBuffer> {
+export function plainTextToArrayBuffer(plainText: string): ArrayBuffer {
   return new TextEncoder().encode(plainText);
 }
 
-export async function arrayBufferToPlainText(buffer: ArrayBuffer): Promise<string> {
+export function arrayBufferToPlainText(buffer: ArrayBuffer): string {
   return new TextDecoder().decode(buffer);
 }
