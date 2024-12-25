@@ -7,8 +7,8 @@ const oaepAlgorithm = {
 
 const pssAlgorithm = {
   name: 'RSA-PSS',
-  saltLength: 32,
-} as const satisfies RsaPssParams;
+  hash: 'SHA-256'
+} as const satisfies RsaHashedImportParams;
 
 async function exportKey(keyFormat: 'spki' | 'pkcs8', key: CryptoKey): Promise<string>{
   const exported = await globalThis.crypto.subtle.exportKey(keyFormat, key);
@@ -17,7 +17,7 @@ async function exportKey(keyFormat: 'spki' | 'pkcs8', key: CryptoKey): Promise<s
 
 function importKey(base64: string, options: {
   keyFormat: 'spki' | 'pkcs8',
-  algorithm: RsaHashedImportParams | RsaPssParams,
+  algorithm: RsaHashedImportParams,
   extractable: boolean,
   keyUsages: KeyUsage[],
 }): Promise<CryptoKey> {
