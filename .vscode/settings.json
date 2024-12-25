@@ -1,0 +1,6 @@
+{
+  "css.lint.unknownAtRules": "ignore",
+  "[prisma]": {
+    "editor.defaultFormatter": "Prisma.prisma"
+  },
+}
