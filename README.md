@@ -128,7 +128,9 @@ Web Crypto APIはデジタル署名にも対応しているので、実装は不
 結構かっこよくなった気がする。
 
 ## リンク
+- [公開先](https://encrypted-board.vercel.app)
 - [GitHub](https://github.com/nanasi-1/encrypted-board)
+- [Vercel Project](https://vercel.com/nanasi-1s-projects/encrypted-board)
 
 ### 参考資料
 
