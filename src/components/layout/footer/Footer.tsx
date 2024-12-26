@@ -20,7 +20,7 @@ export default function Footer() {
       </code>
       <p className="pt-7 pb-8">
         <span className="text-primary pr-0.5">@</span>
-        <a href="https://x.com/n1_code">nanasi-1</a>
+        <a href="https://x.com/n1_code" target="_blank">nanasi-1</a>
       </p>
       <div className="absolute top-0 left-1/2 h-full flex items-center">
         <ul className="flex flex-col gap-y-4">

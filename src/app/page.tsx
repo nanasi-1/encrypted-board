@@ -6,7 +6,7 @@ export default function Home() {
       </div>
       <p>暗号掲示板は現在準備中です</p>
       <p>
-        <a href="https://github.com/nanasi-1/encrypted-board" className="text-secondary underline">GitHub</a>
+        <a href="https://github.com/nanasi-1/encrypted-board" target="_blank" className="text-secondary underline">GitHub</a>
       </p>
     </div>
   );
