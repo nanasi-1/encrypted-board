@@ -2,10 +2,14 @@ const FOOTER_CIPHER = 'M28KODvCFBfdSNoGMSL8hnipVB+gCOGjkG59qOaWsSx5x04A7TaTbg/G+
 
 export default function Footer() {
   return (
-    <footer className="bg-black">
-      <code className="block max-w-full text-xs text-primary break-words opacity-50">
+    <footer className="bg-black px-12">
+      <code className="pt-8 block text-sm text-primary break-words opacity-50">
         {FOOTER_CIPHER}
       </code>
+      <p className="pt-7 pb-8">
+        <span className="text-primary pr-0.5">@</span>
+        <a href="https://x.com/n1_code">nanasi-1</a>
+      </p>
     </footer>
   );
 }
