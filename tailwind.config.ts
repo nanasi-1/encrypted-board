@@ -9,6 +9,7 @@ export default {
   theme: {
     extend: {
       colors: {
+        // @see https://zenn.dev/hayato94087/articles/9b7f95666806be
         primary: {
           'DEFAULT': '#5ed71d',
           '50': '#f2fde8',
@@ -23,7 +24,20 @@ export default {
           '900': '#275116',
           '950': '#102d06',
         },
-        secondary: "#961DD7",
+        secondary: {
+          "DEFAULT": "#bc50fc",
+          '50': '#fbf5ff',
+          '100': '#f6e7ff',
+          '200': '#eed4ff',
+          '300': '#e1b2ff',
+          '400': '#cf80ff',
+          '500': '#bc50fc',
+          '600': '#aa2df0',
+          '700': '#961dd7',
+          '800': '#7c1dac',
+          '900': '#65198a',
+          '950': '#460467',
+        },
       },
     },
   },
