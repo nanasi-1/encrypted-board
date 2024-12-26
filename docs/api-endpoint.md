@@ -51,7 +51,7 @@ Request Body:
   "encrypted-key-digest": "string",
   "sign": { // 署名
     "is": true | false,
-    "sign-key": "string",
+    "signature": "string",
     "sign-key-digest": "string",
   }
 }
