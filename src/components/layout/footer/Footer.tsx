@@ -15,7 +15,7 @@ function NavItem({ children, href, icon }: { children: ReactNode, href: string, 
 export default function Footer() {
   return (
     <footer className="bg-black px-12 relative">
-      <code className="pt-8 block text-sm text-primary break-words opacity-50 cursor-default">
+      <code className="pt-8 block text-sm text-primary break-words opacity-50 select-none">
         {FOOTER_CIPHER}
       </code>
       <p className="pt-7 pb-8">
