@@ -1,6 +1,6 @@
 import Cipher from '@/components/ui/cipher'
 import styles from './post-card.module.css'
-import { Icones, LockIcon, MentionIcon } from '@/components/ui/icons'
+import { Icones, KeyIcon, LockIcon, MentionIcon, MenuDotsIcon } from '@/components/ui/icons'
 
 /** 各投稿のコンポーネント  */
 // `Post`だと投稿を意味する`post`と名前が被るので`PostCard`とした
@@ -25,15 +25,16 @@ export default function PostCard() {
 }
 
 function Menus() {
-  const ICON_SIZE = "1.2rem"
+  const KEY_ICON_SIZE = 1.2
+  const MENU_ICON_SIZE = 1.3
 
   return (
     <ul className={styles['menu']}>
       <li>
-        <Icones width={ICON_SIZE} height={ICON_SIZE} Icon={LockIcon} />
+        <Icones width={`${KEY_ICON_SIZE}rem`} height={`${KEY_ICON_SIZE}rem`} Icon={KeyIcon} />
       </li>
       <li>
-        <Icones width={ICON_SIZE} height={ICON_SIZE} Icon={LockIcon} />
+        <Icones width={`${MENU_ICON_SIZE}rem`} height={`${MENU_ICON_SIZE}rem`} color="white" Icon={MenuDotsIcon} />
       </li>
     </ul>
   )
