@@ -3,9 +3,10 @@ import { SVGProps } from "react";
 
 // by https://icones.js.org/collection/all
 
-export function Icones({ Icon, color, ...props }: SVGProps<SVGSVGElement> & {
+export function Icones({ Icon, color, position, ...props }: SVGProps<SVGSVGElement> & {
   Icon: React.FunctionComponent<React.SVGProps<SVGSVGElement>>,
   color?: string
+  position?: 'left-of-text'
 }) {
   const classname = classnameBuilder()
     .add('inline-block')
@@ -14,8 +15,12 @@ export function Icones({ Icon, color, ...props }: SVGProps<SVGSVGElement> & {
     .addByArray(props.className?.split(' '))
     .build()
 
+  const wrapperClassname = classnameBuilder()
+    .add(position === 'left-of-text' ? 'pr-1' : '')
+    .build()
+
   return (
-    <span>
+    <span className={wrapperClassname}>
       <Icon className={classname}/>
     </span>
   )

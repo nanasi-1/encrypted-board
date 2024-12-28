@@ -7,7 +7,7 @@ const FOOTER_CIPHER = 'M28KODvCFBfdSNoGMSL8hnipVB+gCOGjkG59qOaWsSx5x04A7TaTbg/G+
 function NavItem({ children, href }: { children: ReactNode, href: string }) {
   return (
     <li>
-      <span className="pr-1">
+      <span className="pr-2">
         <Icones Icon={LockIcon} />
       </span>
       <Link href={href}>{children}</Link>
@@ -22,7 +22,7 @@ export default function Footer() {
         {FOOTER_CIPHER}
       </code>
       <p className="pt-7 pb-8">
-        <span className="text-primary pr-0.5">@</span>
+        <Icones Icon={MentionIcon} position="left-of-text" />
         <a href="https://x.com/n1_code" target="_blank">nanasi-1</a>
       </p>
       <div className="absolute top-0 left-1/2 h-full flex items-center">
