@@ -7,7 +7,7 @@ export default function Home() {
         <h1 className="text-center text-3xl font-bold text-primary">Hello World!</h1>
       </div>
       <p>
-        <Icones Icon={LockIcon} color="primary"/>
+        <Icones Icon={LockIcon} color="primary" position="left-of-text" />
         <span>暗号掲示板は現在準備中です</span>
       </p>
       <p>
