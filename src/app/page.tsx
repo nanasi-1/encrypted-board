@@ -4,7 +4,7 @@ import PostCard from "./(components)/post-card/post-card";
 export default function Home() {
   return (
     <>
-      <div className="justify-center flex items-center flex-col gap-y-4 mb-16">
+      <div className="justify-center flex items-center flex-col gap-y-4 mb-12">
         <div className="bg-black px-3 py-1">
           <h1 className="text-center text-3xl font-bold text-primary">Hello World!</h1>
         </div>
