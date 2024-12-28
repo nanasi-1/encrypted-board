@@ -16,20 +16,34 @@ export default function PostCard() {
           <Icones Icon={LockIcon} position="left-of-text" />
           <Cipher color='white'>wAcrImJaLu2iwSz+q428Z7</Cipher>
         </span>
+        <Menus />
       </div>
-      <Cipher className={styles.cipher}>
-        {cipher}
-      </Cipher>
-      { verify ? <VerifyText text={verify} /> : null }
+      <Cipher className={styles.cipher}>{cipher}</Cipher>
+      {verify ? <VerifyText text={verify} /> : null}
     </div>
+  )
+}
+
+function Menus() {
+  const ICON_SIZE = "1.2rem"
+
+  return (
+    <ul className={styles['menu']}>
+      <li>
+        <Icones width={ICON_SIZE} height={ICON_SIZE} Icon={LockIcon} />
+      </li>
+      <li>
+        <Icones width={ICON_SIZE} height={ICON_SIZE} Icon={LockIcon} />
+      </li>
+    </ul>
   )
 }
 
 function VerifyText({ text }: { text: React.ReactNode }) {
   return (
-    <div className='text-sm mt-3'>
+    <div className='text-sm mt-2.5'>
       <Icones Icon={MentionIcon} position="left-of-text" />
-      <span className="opacity-85">{text}</span>
+      <Cipher color='white' className="opacity-85">{text}</Cipher>
     </div>
   )
 }

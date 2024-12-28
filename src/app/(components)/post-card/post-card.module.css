@@ -1,8 +1,8 @@
 .wrapper {
   /* レイアウト */
-  @apply w-5/6 bg-black relative;
+  @apply w-4/5 bg-black relative;
   /* 余白 */
-  @apply px-8 py-5
+  @apply px-8 pt-5 pb-5;
 }
 
 /* @see https://zenn.dev/bicstone/articles/webkit-line-clamp */
@@ -15,18 +15,18 @@
 }
 
 .top-line {
-  @apply mb-3;
+  @apply mb-2;
 }
 
 .date {
-  @apply mr-5;
+  @apply mr-5 tracking-wide;
 }
 
 .menu {
-  /* レイアウト */
+  /* 位置 */
   @apply absolute top-0 right-0;
+  /* レイアウト */
+  @apply flex justify-center items-center gap-x-3;
   /* 余白 */
-  @apply px-2 py-1;
-  /* 色 */
-  @apply bg-gray-800 text-white;
+  @apply pr-4 pt-2;
 }
