@@ -1,10 +1,11 @@
 import { classnameBuilder } from "@/utils/classname-builder"
 
-export default function Cipher({ children, ...props }: React.HTMLProps<HTMLElement> & {
+export default function Cipher({ children, color = 'primary', ...props }: React.HTMLProps<HTMLElement> & {
   children: React.ReactNode
+  color?: string
 }) {
   const classname = classnameBuilder()
-    .add('text-primary')
+    .add(`text-${color}`)
     .add('break-words')
     .addByArray(props.className?.split(' '))
     .build()

@@ -1,0 +1,32 @@
+.wrapper {
+  /* レイアウト */
+  @apply w-5/6 bg-black relative;
+  /* 余白 */
+  @apply px-8 py-5
+}
+
+/* @see https://zenn.dev/bicstone/articles/webkit-line-clamp */
+.cipher {
+  overflow: hidden;
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.top-line {
+  @apply mb-3;
+}
+
+.date {
+  @apply mr-5;
+}
+
+.menu {
+  /* レイアウト */
+  @apply absolute top-0 right-0;
+  /* 余白 */
+  @apply px-2 py-1;
+  /* 色 */
+  @apply bg-gray-800 text-white;
+}
