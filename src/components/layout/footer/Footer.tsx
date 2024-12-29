@@ -28,7 +28,7 @@ export default function Footer() {
           <a href="https://x.com/n1_code" target="_blank">nanasi-1</a>
         </span>
         <a href="https://github.com/nanasi-1/encrypted-board" target="_blank">
-          <Icones Icon={GitHubIcon} className="ml-4" height="1,3rem" width="1.3rem"/>
+          <Icones Icon={GitHubIcon} className="ml-4" height="1.3rem" width="1.3rem"/>
         </a>
       </p>
       <div className="absolute top-0 left-1/2 h-full flex items-center">
