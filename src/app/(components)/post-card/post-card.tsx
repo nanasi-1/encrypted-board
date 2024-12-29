@@ -1,6 +1,7 @@
 import Cipher from '@/components/ui/cipher'
 import styles from './post-card.module.css'
-import { Icones, KeyIcon, LockIcon, MentionIcon, MenuDotsIcon } from '@/components/ui/icons'
+import { Icones, LockIcon, MentionIcon } from '@/components/ui/icons'
+import Menus from './menus'
 
 /** 各投稿のコンポーネント  */
 // `Post`だと投稿を意味する`post`と名前が被るので`PostCard`とした
@@ -21,29 +22,6 @@ export default function PostCard() {
       <Cipher className={styles.cipher}>{cipher}</Cipher>
       {verify ? <VerifyText text={verify} /> : null}
     </div>
-  )
-}
-
-function Menus({ onKeyClick, onMoreClick }: {
-  onKeyClick?: () => void,
-  onMoreClick?: () => void,
-}) {
-  const KEY_ICON_SIZE = 1.2
-  const MORE_ICON_SIZE = 1.3
-
-  return (
-    <ul className={styles['menu']}>
-      <li>
-        <button onClick={onKeyClick}>
-          <Icones width={`${KEY_ICON_SIZE}rem`} height={`${KEY_ICON_SIZE}rem`} Icon={KeyIcon} />
-        </button>
-      </li>
-      <li>
-        <button onClick={onMoreClick}>
-          <Icones width={`${MORE_ICON_SIZE}rem`} height={`${MORE_ICON_SIZE}rem`} color="white" Icon={MenuDotsIcon} />
-        </button>
-      </li>
-    </ul>
   )
 }
 
