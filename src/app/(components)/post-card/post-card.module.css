@@ -1,6 +1,6 @@
 .wrapper {
   /* レイアウト */
-  @apply w-4/5 bg-black relative;
+  @apply w-4/5 bg-black relative shadow-md;
   /* 余白 */
   @apply px-8 pt-5 pb-5;
 }
