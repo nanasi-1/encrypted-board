@@ -16,7 +16,12 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "暗号掲示板",
-  description: "暗号化されたメッセージが投稿できる掲示板",
+  description: "暗号しか投稿できない匿名掲示板",
+  openGraph: {
+    images: [{
+      url: 'OGP.png'
+    }]
+  }
 };
 
 export default function RootLayout({
