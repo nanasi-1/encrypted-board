@@ -1,3 +1,7 @@
+.pagination-list {
+  @apply flex gap-x-1;
+}
+
 .list-item {
   @apply w-10 text-center;
 }

@@ -2,12 +2,18 @@ import { classnameBuilder } from "@/utils/classname-builder"
 import Link from "next/link"
 import styles from './pagination.module.css'
 
-function Nav({ children, href, current, disabled }: {
+type NavProps = {
   children: React.ReactNode
-  href: string
   current?: boolean
-  disabled?: boolean
-}) {
+} & ({
+  disabled: true
+  href?: string
+} | {
+  disabled?: false
+  href: string
+})
+
+function Nav({ children, href, current, disabled }: NavProps) {
   const innerClassname = classnameBuilder()
     .add(styles['inner'])
     .add(current ? styles['current'] : null)
@@ -31,9 +37,20 @@ function Nav({ children, href, current, disabled }: {
   )
 }
 
-export default function Pagination() {
+// Navと同じwidthのコンポーネント
+function NavDummy() {
+  return <li className="w-10"></li>
+}
+
+export default function Pagination({ currentPage = 3 /* 仮 */ }: {
+  currentPage?: number
+}) {
+  const basePath = "/"
+  const minPage = 0
+  const maxPage = 3
+  
   return (
-    <ul className="flex gap-x-1">
+    <ul className={styles['pagination-list']}>
       <Nav href="/?page=1" children={1} />
       <Nav href="/?page=2" children={2} current />
       <Nav href="/?page=3" children={3} disabled />
