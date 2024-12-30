@@ -1,5 +1,6 @@
 import { classnameBuilder } from "@/utils/classname-builder"
 import Link from "next/link"
+import styles from './pagination.module.css'
 
 function Nav({ children, href, current, disabled }: {
   children: React.ReactNode
@@ -8,18 +9,22 @@ function Nav({ children, href, current, disabled }: {
   disabled?: boolean
 }) {
   const innerClassname = classnameBuilder()
-    .addByArray(['border-primary', 'px-2', 'block', 'pb-0.5', 'text-lg'] as const)
-    .add(`border-b-${current ? '2' : '0'}`) // 線を入れるかどうか
-    .addByArray(disabled ? ['opacity-60', 'cursor-not-allowed'] : ['font-bold'])
+    .add(styles['inner'])
+    .add(current ? styles['current'] : null)
+    .add(disabled ? styles['disabled'] : null)
     .build()
 
-  const buttonClassname = classnameBuilder()
-    .addByArray(["py-2"])
-    .build()
+  if (disabled) {
+    return (
+      <li className={styles['list-item']}>
+        <span className={innerClassname}>{children}</span>
+      </li>
+    )
+  }
 
   return (
-    <li className="w-10 text-center">
-      <Link className={buttonClassname} href={href}>
+    <li className={styles['list-item']}>
+      <Link className={styles['anchor']} href={href}>
         <span className={innerClassname}>{children}</span>
       </Link>
     </li>
