@@ -1,5 +1,6 @@
 import { Icones, LockIcon } from "@/components/ui/icons";
 import PostCard from "./(components)/post-card/post-card";
+import Pagination from "@/components/ui/pagenation/pagination";
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
         <PostCard />
         <PostCard />
         <PostCard />
+        <Pagination />
       </div>
     </>
   );
