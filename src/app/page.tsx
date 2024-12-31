@@ -3,9 +3,10 @@ import PostCard from "./(components)/post-card/post-card";
 import Pagination from "@/components/ui/pagination/pagination";
 
 export default async function Home({ searchParams }: {
-  searchParams: { page?: string }
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>,
 }) {
-  const currentPage = parseInt(searchParams.page ?? '1');
+  const page = (await searchParams).page ?? '1';
+  const currentPage = parseInt(page instanceof Array ? page[0] : page);
 
   return (
     <>
