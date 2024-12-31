@@ -2,7 +2,11 @@ import { Icones, LockIcon } from "@/components/ui/icons";
 import PostCard from "./(components)/post-card/post-card";
 import Pagination from "@/components/ui/pagination/pagination";
 
-export default function Home() {
+export default async function Home({ searchParams }: {
+  searchParams: { page?: string }
+}) {
+  const currentPage = parseInt(searchParams.page ?? '1');
+
   return (
     <>
       <div className="justify-center flex items-center flex-col gap-y-4 mb-12">
@@ -21,7 +25,7 @@ export default function Home() {
         <PostCard />
         <PostCard />
         <PostCard />
-        <Pagination />
+        <Pagination currentPage={currentPage} />
       </div>
     </>
   );
