@@ -6,7 +6,7 @@ const algorithm = {
 } as const satisfies RsaOaepParams
 
 export async function encrypt(plainText: string, publicKey: CryptoKey): Promise<string> {
-  const textBuf = await plainTextToArrayBuffer(plainText);
+  const textBuf = plainTextToArrayBuffer(plainText);
   const cipherBuf = await globalThis.crypto.subtle.encrypt(
     algorithm,
     publicKey,
