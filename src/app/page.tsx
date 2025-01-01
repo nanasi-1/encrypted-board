@@ -1,7 +1,13 @@
 import { Icones, LockIcon } from "@/components/ui/icons";
 import PostCard from "./(components)/post-card/post-card";
+import Pagination from "@/components/ui/pagination/pagination";
 
-export default function Home() {
+export default async function Home({ searchParams }: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>,
+}) {
+  const page = (await searchParams).page ?? '1';
+  const currentPage = parseInt(page instanceof Array ? page[0] : page);
+
   return (
     <>
       <div className="justify-center flex items-center flex-col gap-y-4 mb-12">
@@ -20,6 +26,7 @@ export default function Home() {
         <PostCard />
         <PostCard />
         <PostCard />
+        <Pagination currentPage={currentPage} maxPage={4} baseHref="/?page="/>
       </div>
     </>
   );

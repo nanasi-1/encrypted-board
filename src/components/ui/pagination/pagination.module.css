@@ -1,0 +1,24 @@
+.pagination-list {
+  @apply flex gap-x-1;
+}
+
+.list-item {
+  @apply w-10 text-center;
+}
+
+.inner {
+  /* base */
+  @apply border-primary px-2 inline-block pb-0.5 text-lg border-b-0;
+
+  &.current {
+    @apply border-b-2;
+  }
+
+  &.disabled {
+    @apply opacity-60 cursor-not-allowed;
+  }
+}
+
+.anchor {
+  @apply hover:no-underline;
+}
