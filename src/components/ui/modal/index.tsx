@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { Icones, CloseIcon } from '../icons'
 import styles from './index.module.css'
+import { useModalContext } from './context'
 
 export function ModalUI({ children, onClose }: {
   children?: React.ReactNode
@@ -24,14 +25,19 @@ export function ModalUI({ children, onClose }: {
 
 // モーダルを制御する関数付きフック
 // TODO 複数のモーダルが一度に開かれた時どうするか考える
-export function useModal(children?: React.ReactNode) {
+export function useNewModal(children?: React.ReactNode) {
   const [isOpen, setIsOpen] = useState(false)
-  const open = () => setIsOpen(true)
+  const { setModalComponent } = useModalContext()
+  
   const close = () => setIsOpen(false)
+  const open = () => {
+    setIsOpen(true)
+    setModalComponent(modal)
+  }
 
   const modal = isOpen ? (
     <ModalUI onClose={close}>{children}</ModalUI>
   ) : null
 
-  return { modal, open, close }
+  return { modal, open, close } // 基本はopenのみを使う
 }
