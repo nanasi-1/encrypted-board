@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import { Icones, CloseIcon } from '../icons'
 import styles from './index.module.css'
 
@@ -11,7 +12,8 @@ export function ModalUI({ children, onClose }: {
   // TODO align-centerをどうするか考える
   return (
     <div className={styles['bg']} onClick={onClose}>
-      <div className={styles['wrapper']}>
+      {/* stopPropagation: コンテンツをクリックするとモーダルが閉じるのを防止 */}
+      <div className={styles['wrapper']} onClick={e => e.stopPropagation()}>
         <button className={styles['close-button']} onClick={onClose}>
           <Icones Icon={CloseIcon} fontSize={20} />
         </button>
@@ -22,23 +24,28 @@ export function ModalUI({ children, onClose }: {
 }
 
 // クライアントで呼び出す
-export function createModal() {
-  const modal = (
-    <ModalUI onClose={() => console.log('close')}>
+export function useModal() {
+  const [isShow, setIsShow] = useState(false)
+  const show = () => setIsShow(true)
+  const hide = () => setIsShow(false)
+
+  const modal = isShow ? (
+    <ModalUI onClose={hide}>
       Hello World!
     </ModalUI>
-  )
-  return { modal }
+  ) : null
+
+  return { modal, show, hide }
 }
 
 // モーダルが開く時は何らかのユーザーアクションがある
 // -> これはクライアントコンポーネントで問題ない...はず
 export function DummyModal() {
-  const { modal } = createModal()
+  const { modal, show } = useModal()
 
   return (
     <div>
-      <button>open</button>
+      <button onClick={show}>open</button>
       {modal}
     </div>
   )
