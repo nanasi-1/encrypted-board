@@ -6,8 +6,8 @@ const ModalContext = createContext<{
   modalComponent: React.ReactNode,
   setModalComponent: (component: React.ReactNode) => void
 }>({
-  modalComponent: null,
-  setModalComponent: () => {}
+  modalComponent: <div>初期値</div>,
+  setModalComponent: () => { }
 })
 
 export function ModalProvider({ children }: { children: React.ReactNode }) {
