@@ -1,11 +1,12 @@
 import { Icones, AddEncryptionIcon } from "@/components/ui/icons"
+import styles from './post-button.module.css'
 
 function UI({ Icon }: {
   Icon: React.FunctionComponent<React.SVGProps<SVGSVGElement>>
 }) {
   return (
-    <button className="border-primary border-2">
-      <Icones Icon={Icon} />
+    <button className={styles['button']}>
+      <Icones Icon={Icon} fontSize={24} />
     </button>
   )
 }

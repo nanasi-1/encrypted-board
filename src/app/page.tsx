@@ -1,7 +1,7 @@
 import { Icones, LockIcon } from "@/components/ui/icons";
 import PostCard from "./(components)/post-card/post-card";
 import Pagination from "@/components/ui/pagination/pagination";
-import PostButton from "./(components)/post-button";
+import PostButton from "./(components)/post-button/post-button";
 
 export default async function Home({ searchParams }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>,
