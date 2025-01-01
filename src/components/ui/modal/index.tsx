@@ -23,16 +23,15 @@ export function ModalUI({ children, onClose }: {
 }
 
 // モーダルを制御する関数付きフック
-export function useModal() {
-  const [isShow, setIsShow] = useState(false)
-  const show = () => setIsShow(true)
-  const hide = () => setIsShow(false)
+// TODO 複数のモーダルが一度に開かれた時どうするか考える
+export function useModal(children?: React.ReactNode) {
+  const [isOpen, setIsOpen] = useState(false)
+  const open = () => setIsOpen(true)
+  const close = () => setIsOpen(false)
 
-  const modal = isShow ? (
-    <ModalUI onClose={hide}>
-      Hello World!
-    </ModalUI>
+  const modal = isOpen ? (
+    <ModalUI onClose={close}>{children}</ModalUI>
   ) : null
 
-  return { modal, show, hide }
+  return { modal, open, close }
 }
