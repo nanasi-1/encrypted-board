@@ -1,10 +1,13 @@
+'use client'
+
 import { Icones, AddEncryptionIcon } from "@/components/ui/icons"
 import styles from './post-button.module.css'
 import { classnameBuilder } from "@/utils/classname-builder"
 
-function UI({ Icon, className }: {
+function UI({ Icon, className, onClick }: {
   Icon: React.FunctionComponent<React.SVGProps<SVGSVGElement>>
   className?: string
+  onClick?: () => void
 }) {
   const _className = classnameBuilder()
     .add(styles['button'])
@@ -12,14 +15,22 @@ function UI({ Icon, className }: {
     .build()
 
   return (
-    <button className={_className}>
+    <button className={_className} onClick={onClick}>
       <Icones Icon={Icon} fontSize={24} />
     </button>
   )
 }
 
 export default function PostButton() {
+  const openModal = () => {
+    console.log('open modal')
+  }
+
   return (
-    <UI Icon={AddEncryptionIcon} className="bottom-10 right-10" />
+    <UI 
+      Icon={AddEncryptionIcon} 
+      className="bottom-10 right-10" 
+      onClick={openModal}
+    />
   )
 }
