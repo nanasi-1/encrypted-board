@@ -1,7 +1,6 @@
 import { Icones, LockIcon } from "@/components/ui/icons";
-import PostCard from "./(components)/post-card/post-card";
-import Pagination from "@/components/ui/pagination/pagination";
 import FixedButtons from "./(components)/fixed-buttons";
+import Posts from "./(components)/posts";
 
 export default async function Home({ searchParams }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>,
@@ -23,12 +22,7 @@ export default async function Home({ searchParams }: {
           <a href="https://github.com/nanasi-1/encrypted-board" target="_blank" className="text-secondary underline">GitHub</a>
         </p>
       </div>
-      <div className="flex items-center flex-col gap-y-7">
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <Pagination currentPage={currentPage} maxPage={4} baseHref="/?page=" />
-      </div>
+      <Posts currentPage={currentPage} />
       <FixedButtons />
     </>
   );

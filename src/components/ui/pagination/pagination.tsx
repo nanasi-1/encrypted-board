@@ -42,12 +42,13 @@ function NavDummy() {
   return <li className="w-10"></li>
 }
 
-export default function Pagination({ currentPage, maxPage, minPage = 1, baseHref }: {
+export default function Pagination({ currentPage, hasNext, baseHref }: {
   currentPage: number
-  maxPage: number
-  minPage?: number
+  hasNext: boolean
   baseHref: string
 }) {
+  const minPage = 1
+
   return (
     <ul className={styles['pagination-list']}>
       {
@@ -57,11 +58,10 @@ export default function Pagination({ currentPage, maxPage, minPage = 1, baseHref
       }
       <Nav
         href={`${baseHref}${currentPage}`}
-        disabled={currentPage > maxPage || currentPage < minPage}
         current
       >{currentPage}</Nav>
       {
-        currentPage + 1 <= maxPage
+        hasNext
           ? <Nav href={`${baseHref}${currentPage + 1}`}>{currentPage + 1}</Nav>
           : <NavDummy />
       }
