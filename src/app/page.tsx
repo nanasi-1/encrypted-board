@@ -27,7 +27,7 @@ export default async function Home({ searchParams }: {
         <PostCard />
         <PostCard />
         <PostCard />
-        <Pagination currentPage={currentPage} maxPage={4} baseHref="/?page="/>
+        <Pagination currentPage={currentPage} maxPage={4} baseHref="/?page=" />
       </div>
       <FixedButtons />
     </>

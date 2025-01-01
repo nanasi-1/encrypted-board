@@ -1,0 +1,22 @@
+.bg {
+  /* 見た目 */
+  @apply bg-black/30 w-screen h-screen fixed top-0 z-20;
+  /* 位置 */
+  @apply flex justify-center items-center;
+}
+
+.wrapper {
+  /* 見た目 */
+  @apply bg-black border-primary border w-1/2;
+  /* 余白 */
+  @apply px-8 py-8;
+  /* その他 */
+  @apply relative;
+}
+
+.close-button {
+  /* 位置 */
+  @apply absolute top-3 right-4;
+  /* hover */
+  @apply transition-opacity hover:opacity-80;
+}
