@@ -1,5 +1,5 @@
 // 右下のボタンのコンテナ
-import PostButton from "./post-button/post-button";
+import PostButton from "./post-button";
 
 export default function FixedButtons(/* 各ボタンに必要なprops */) {
   return (
