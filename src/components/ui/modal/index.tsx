@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { Icones, CloseIcon } from '../icons'
 import styles from './index.module.css'
 
-// クライアントコンポーネント
 export function ModalUI({ children, onClose }: {
   children?: React.ReactNode
   onClose?: () => void
@@ -23,7 +22,7 @@ export function ModalUI({ children, onClose }: {
   )
 }
 
-// クライアントで呼び出す
+// モーダルを制御する関数付きフック
 export function useModal() {
   const [isShow, setIsShow] = useState(false)
   const show = () => setIsShow(true)
@@ -36,17 +35,4 @@ export function useModal() {
   ) : null
 
   return { modal, show, hide }
-}
-
-// モーダルが開く時は何らかのユーザーアクションがある
-// -> これはクライアントコンポーネントで問題ない...はず
-export function DummyModal() {
-  const { modal, show } = useModal()
-
-  return (
-    <div>
-      <button onClick={show}>open</button>
-      {modal}
-    </div>
-  )
 }
