@@ -13,3 +13,10 @@
   /* その他 */
   @apply relative;
 }
+
+.close-button {
+  /* 位置 */
+  @apply absolute top-3 right-4;
+  /* hover */
+  @apply transition-opacity hover:opacity-80;
+}
