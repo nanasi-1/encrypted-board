@@ -29,7 +29,6 @@ export default function PostButton() {
   return (
     <UI 
       Icon={AddEncryptionIcon} 
-      className="bottom-10 right-10" 
       onClick={openModal}
     />
   )
