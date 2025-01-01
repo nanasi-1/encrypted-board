@@ -4,6 +4,9 @@
     "editor.defaultFormatter": "Prisma.prisma"
   },
   "cSpell.words": [
-    "Icones"
+    "arrbuf",
+    "Icones",
+    "OAEP",
+    "turbopack"
   ],
 }
