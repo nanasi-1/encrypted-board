@@ -1,0 +1,11 @@
+.bg {
+  /* 見た目 */
+  @apply bg-black/30 w-screen h-screen fixed top-0 z-20;
+  /* 位置 */
+  @apply flex justify-center items-center;
+}
+
+.wrapper {
+  /* 見た目 */
+  @apply bg-black border-primary border w-1/2;
+}

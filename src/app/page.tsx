@@ -2,6 +2,7 @@ import { Icones, LockIcon } from "@/components/ui/icons";
 import PostCard from "./(components)/post-card/post-card";
 import Pagination from "@/components/ui/pagination/pagination";
 import FixedButtons from "./(components)/fixed-buttons";
+import { ModalUI } from "@/components/ui/modal";
 
 export default async function Home({ searchParams }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>,
@@ -30,6 +31,7 @@ export default async function Home({ searchParams }: {
         <Pagination currentPage={currentPage} maxPage={4} baseHref="/?page="/>
       </div>
       <FixedButtons />
+      <ModalUI />
     </>
   );
 }
