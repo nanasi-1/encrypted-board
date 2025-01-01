@@ -15,7 +15,7 @@ export function ModalUI({ children, onClose }: {
       {/* stopPropagation: コンテンツをクリックするとモーダルが閉じるのを防止 */}
       <div className={styles['wrapper']} onClick={e => e.stopPropagation()}>
         <button className={styles['close-button']} onClick={onClose}>
-          <Icones Icon={CloseIcon} fontSize={20} />
+          <Icones Icon={CloseIcon} fontSize={24} />
         </button>
         {children}
       </div>
