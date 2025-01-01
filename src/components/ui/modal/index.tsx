@@ -41,16 +41,3 @@ export function useModal(children?: React.ReactNode) {
 
   return { open, close, isOpen } // 基本はopenのみを使う
 }
-
-// useNewModalするダミーのコンポーネント
-export function DummyUseModal() {
-  const { open, isOpen } = useModal(<div>This is dummy modal</div>)
-  // @ts-ignore
-  window.openModal = open
-  return (
-    <div>
-      <button onClick={open}>open</button>
-      status: {isOpen ? 'open' : 'close'}
-    </div>
-  )
-}
