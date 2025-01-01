@@ -31,7 +31,7 @@ export default async function Home({ searchParams }: {
         <Pagination currentPage={currentPage} maxPage={4} baseHref="/?page="/>
       </div>
       <FixedButtons />
-      <ModalUI />
+      <ModalUI>ポップアップ</ModalUI>
     </>
   );
 }
