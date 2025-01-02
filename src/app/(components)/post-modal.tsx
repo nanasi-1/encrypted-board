@@ -1,21 +1,47 @@
 'use client'
 
 import { ModalTitle } from "@/components/ui/modal/ModalUI";
-import { FormEventHandler } from "react";
+import { FormEventHandler, useState } from "react";
 
 const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
-  console.log(event)
+  const formData = new FormData(event.currentTarget)
+  console.log([...formData.entries()])
   debugger
 }
 
+function validatePlainText(text: string) {
+  const MAX_PLAIN_TEXT_LENGTH = 255
+
+  // 0文字（空）ならOK
+  if (text.length === 0) {
+    return null
+  }
+
+  // 255文字以内ならOK
+  if (text.length <= MAX_PLAIN_TEXT_LENGTH) {
+    return null
+  }
+
+  return '平文は255文字以内で入力してください'
+}
+
 export default function PostModal() {
+  const [error, setError] = useState<React.ReactNode | null>(null)
+  const [value, setValue] = useState('')
+
+  const onChange: React.ChangeEventHandler<HTMLTextAreaElement> = (event) => {
+    setValue(event.target.value)
+    setError(validatePlainText(event.target.value))
+  }
+
   return (
     <>
       <ModalTitle>投稿</ModalTitle>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="">平文</label>
-          <input type="text" required />
+          <textarea value={value} onChange={onChange} required />
+          {error && <span>{error}</span>}
         </div>
         <div>
           <label htmlFor="">公開鍵</label>
