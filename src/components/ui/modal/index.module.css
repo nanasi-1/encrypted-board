@@ -1,13 +1,12 @@
-.bg {
-  /* 見た目 */
-  @apply bg-black/30 w-screen h-screen fixed top-0 z-20;
+.wrapper {
+  @apply w-screen h-screen fixed top-0 left-0 text-white;
   /* 位置 */
   @apply flex justify-center items-center;
 }
 
-.wrapper {
+.content {
   /* 見た目 */
-  @apply bg-black border-primary border w-1/2;
+  @apply bg-black border-primary border w-1/2 text-white;
   /* 余白 */
   @apply px-8 py-8;
   /* その他 */

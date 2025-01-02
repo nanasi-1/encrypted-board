@@ -9,3 +9,8 @@ body {
 a {
   @apply hover:underline;
 }
+
+dialog::backdrop {
+  /* 見た目 */
+  @apply bg-black/30;
+}

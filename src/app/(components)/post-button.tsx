@@ -13,12 +13,12 @@ function PostModal() {
 }
 
 export default function PostButton() {
-  const { open: openModal } = useModal(<PostModal />)
+  const { open: openModal } = useModal()
 
   return (
     <RoundedIconButton
       Icon={AddEncryptionIcon}
-      onClick={openModal}
+      onClick={() => openModal(<PostModal />)}
     />
   )
 }
