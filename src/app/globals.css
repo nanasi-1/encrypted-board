@@ -14,3 +14,7 @@ dialog::backdrop {
   /* 見た目 */
   @apply bg-black/30;
 }
+
+input, textarea {
+  @apply bg-black;
+}
