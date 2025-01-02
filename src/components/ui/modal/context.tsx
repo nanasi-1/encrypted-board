@@ -5,12 +5,8 @@ import React, { createContext, useContext, useRef, useState } from "react";
 const ModalContext = createContext<{
   modalComponent: React.ReactNode,
   setModalComponent: (component: React.ReactNode) => void
-  dialogRef: React.RefObject<HTMLDialogElement | null> | null
-}>({
-  modalComponent: null,
-  setModalComponent: () => { },
-  dialogRef: null
-})
+  dialogRef: React.RefObject<HTMLDialogElement | null>
+} | null>(null)
 
 export function ModalProvider({ children }: { children: React.ReactNode }) {
   const [modalComponent, setModalComponent] = useState<React.ReactNode>(null)
@@ -27,9 +23,9 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
 }
 
 export function useModalContext() {
-  const { dialogRef, ...other } = useContext(ModalContext)
-  if (dialogRef === null) { // nullではないことを証明する
+  const context = useContext(ModalContext)
+  if (context === null) {
     throw new Error('useModalContext must be used within a ModalProvider')
   }
-  return { dialogRef, ...other }
+  return context
 }
