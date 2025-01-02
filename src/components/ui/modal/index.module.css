@@ -1,6 +1,6 @@
 .bg {
   /* 見た目 */
-  @apply bg-black/30 w-screen h-screen fixed top-0 z-20 text-white;
+  @apply bg-black/30 w-screen h-screen fixed top-0 text-white;
   /* 位置 */
   @apply flex justify-center items-center;
 }

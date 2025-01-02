@@ -1,26 +1,36 @@
 'use client'
 
-import { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useRef, useState } from "react";
+import { ModalUI } from ".";
 
 const ModalContext = createContext<{
   modalComponent: React.ReactNode,
   setModalComponent: (component: React.ReactNode) => void
+  dialogRef: React.RefObject<HTMLDialogElement | null> | null
 }>({
-  modalComponent: <div>初期値</div>,
-  setModalComponent: () => { }
+  modalComponent: null,
+  setModalComponent: () => { },
+  dialogRef: null
 })
 
 export function ModalProvider({ children }: { children: React.ReactNode }) {
   const [modalComponent, setModalComponent] = useState<React.ReactNode>(null)
+  const dialogRef = useRef<HTMLDialogElement>(null)
 
   return (
-    <ModalContext.Provider value={{ modalComponent, setModalComponent }}>
+    <ModalContext.Provider value={{ modalComponent, setModalComponent, dialogRef }}>
       {children}
-      {modalComponent}
+      <ModalUI dialogRef={dialogRef}>
+        {modalComponent}
+      </ModalUI>
     </ModalContext.Provider>
   )
 }
 
 export function useModalContext() {
-  return useContext(ModalContext)
+  const { dialogRef, ...other } = useContext(ModalContext)
+  if(dialogRef === null) { // nullではないことを証明する
+    throw new Error('useModalContext must be used within a ModalProvider')
+  }
+  return { dialogRef, ...other }
 }
