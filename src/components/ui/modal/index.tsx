@@ -4,7 +4,7 @@ import { useModalContext } from './context'
 import ModalUI from './ModalUI'
 
 // モーダルを制御する関数付きフック
-// TODO 複数のモーダルが一度に開かれた時どうするか考える
+// 複数モーダルには対応せず、呼び出し側が気を付ける
 export function useModal() {
   const { setModalComponent, dialogRef } = useModalContext()
 

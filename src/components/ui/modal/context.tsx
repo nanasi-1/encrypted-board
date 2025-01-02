@@ -1,6 +1,6 @@
 'use client'
 
-import React, { createContext, useContext, useRef, useState } from "react";
+import { createContext, useContext, useRef, useState } from "react";
 
 const ModalContext = createContext<{
   modalComponent: React.ReactNode,
