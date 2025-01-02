@@ -20,7 +20,7 @@ export function ModalUI({ children, onClose, dialogRef }: {
   // TODO align-centerをどうするか考える
   return (
     <dialog ref={dialogRef}>
-      <div className={styles['bg']} onClick={closeModal}>
+      <div className={styles['overlay']} onClick={closeModal}>
         {/* stopPropagation: コンテンツをクリックするとモーダルが閉じるのを防止 */}
         <div className={styles['wrapper']} onClick={e => e.stopPropagation()}>
           <button className={styles['close-button']} onClick={closeModal}>
