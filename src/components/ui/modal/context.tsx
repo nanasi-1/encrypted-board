@@ -1,7 +1,7 @@
 'use client'
 
 import React, { createContext, useContext, useRef, useState } from "react";
-import { ModalUI } from ".";
+import ModalUI from "./ModalUI";
 
 const ModalContext = createContext<{
   modalComponent: React.ReactNode,
