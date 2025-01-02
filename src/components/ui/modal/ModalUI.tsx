@@ -1,24 +1,21 @@
 import { Icones, CloseIcon } from "../icons"
 import styles from './index.module.css'
 
-export default function ModalUI({ children, dialogRef }: {
+export default function ModalUI({ children, onClose }: {
   children?: React.ReactNode
   dialogRef?: React.RefObject<HTMLDialogElement | null>
+  onClose?: () => void
 }) {
-  const closeModal = () => dialogRef?.current?.close()
-
   // TODO align-centerをどうするか考える
   return (
-    <dialog ref={dialogRef}>
-      <div className={styles['overlay']} onClick={closeModal}>
-        {/* stopPropagation: コンテンツをクリックするとモーダルが閉じるのを防止 */}
-        <div className={styles['wrapper']} onClick={e => e.stopPropagation()}>
-          <button className={styles['close-button']} onClick={closeModal}>
-            <Icones Icon={CloseIcon} fontSize={24} />
-          </button>
-          {children}
-        </div>
+    <div className={styles['overlay']} onClick={onClose}>
+      {/* stopPropagation: コンテンツをクリックするとモーダルが閉じるのを防止 */}
+      <div className={styles['wrapper']} onClick={e => e.stopPropagation()}>
+        <button className={styles['close-button']} onClick={onClose}>
+          <Icones Icon={CloseIcon} fontSize={24} />
+        </button>
+        {children}
       </div>
-    </dialog>
+    </div>
   )
 }

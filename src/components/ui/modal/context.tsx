@@ -1,7 +1,6 @@
 'use client'
 
 import React, { createContext, useContext, useRef, useState } from "react";
-import ModalUI from "./ModalUI";
 
 const ModalContext = createContext<{
   modalComponent: React.ReactNode,
@@ -20,16 +19,16 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
   return (
     <ModalContext.Provider value={{ modalComponent, setModalComponent, dialogRef }}>
       {children}
-      <ModalUI dialogRef={dialogRef}>
+      <dialog ref={dialogRef}>
         {modalComponent}
-      </ModalUI>
+      </dialog>
     </ModalContext.Provider>
   )
 }
 
 export function useModalContext() {
   const { dialogRef, ...other } = useContext(ModalContext)
-  if(dialogRef === null) { // nullではないことを証明する
+  if (dialogRef === null) { // nullではないことを証明する
     throw new Error('useModalContext must be used within a ModalProvider')
   }
   return { dialogRef, ...other }
