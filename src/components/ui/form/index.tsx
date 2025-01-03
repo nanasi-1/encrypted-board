@@ -1,4 +1,5 @@
 import { classnameBuilder } from "@/utils/classname-builder"
+import styles from './index.module.css'
 
 export function FormLabel({ className, ...props }
   : React.DetailedHTMLProps<React.LabelHTMLAttributes<HTMLLabelElement>, HTMLLabelElement>
@@ -50,8 +51,7 @@ export function SubmitButton({ className, ...props }
   : React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
 ) {
   const _className = classnameBuilder()
-    .addByArray(['bg-stone-750', 'py-1.5', 'px-3.5', 'rounded-md']) // base
-    .addByArray(['border', 'border-primary', 'text-base', 'text-primary'])
+    .add(styles['submit-button'])
     .addByArray(className?.split(' '))
     .build()
 

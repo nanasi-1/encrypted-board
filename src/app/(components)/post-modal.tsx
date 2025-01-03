@@ -41,15 +41,25 @@ export default function PostModal() {
       <form onSubmit={handleSubmit}>
         <FormSection>
           <FormLabel>平文</FormLabel>
-          <FormTextarea value={value} onChange={onChange} required placeholder="投稿したいメッセージを入力..." />
+          <FormTextarea 
+            value={value} 
+            onChange={onChange} 
+            required 
+            placeholder="投稿したいメッセージを入力..."
+            className={error ? 'border-red-500' : ''}
+          />
           {error && <ValidationError>{error}</ValidationError>}
         </FormSection>
         <FormSection>
           <FormLabel>公開鍵</FormLabel>
           <FormInput type="text" required placeholder="暗号化に使う公開鍵を入力..." />
         </FormSection>
+        <FormSection>
+          <FormLabel>署名</FormLabel>
+          <FormInput type="text" placeholder="署名鍵を入力..." />
+        </FormSection>
         <hr className="my-8 border-gray-400" />
-        <SubmitButton>投稿</SubmitButton>
+        <SubmitButton disabled={!!error}>投稿</SubmitButton>
       </form>
     </>
   )

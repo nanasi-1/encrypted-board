@@ -1,0 +1,10 @@
+.submit-button {
+  /* base */
+  @apply bg-stone-750 py-1.5 px-3.5 rounded-md;
+  /* border & text */
+  @apply border border-primary text-base text-primary;
+  
+  &:disabled {
+    @apply cursor-not-allowed border-stone-400 text-stone-400;
+  }
+}
