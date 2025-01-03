@@ -13,7 +13,10 @@ export function FormLabel({ className, ...props }
   )
 }
 
-const inputBaseClass = ['border-primary', 'w-full', 'border', 'px-3'] as const
+const inputBaseClass = [
+  'border-primary', 'w-full', 'border', 'px-3', 'placeholder:text-gray-200', // base
+  'transition', 'focus:outline-none', 'focus:border-secondary-400', // focus
+] as const
 
 export function FormInput({ className, ...props }
   : React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
@@ -34,7 +37,7 @@ export function FormTextarea({ className, ...props }
 ) {
   const _className = classnameBuilder()
     .addByArray(inputBaseClass)
-    .addByArray(['py-2', 'h-32'])
+    .addByArray(['py-2', 'h-32', 'resize-none'])
     .addByArray(className?.split(' '))
     .build()
 
