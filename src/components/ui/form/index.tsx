@@ -77,12 +77,12 @@ export function ValidationError({ className, ...props }
   : React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
 ) {
   const _className = classnameBuilder()
-    .addByArray([])
+    .addByArray(['text-red-500', 'text-sm', 'mt-1', 'block'])
     .addByArray(className?.split(' '))
     .build()
 
   return (
-    <span className={_className + ' text-red-500 text-sm mt-1 block'} {...props}>
+    <span className={_className} {...props}>
       ERROR: {props.children}
     </span>
   )

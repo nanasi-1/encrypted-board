@@ -7,4 +7,8 @@
   &:disabled {
     @apply cursor-not-allowed border-stone-400 text-stone-400;
   }
+
+  &:hover {
+    @apply border-secondary-400 text-secondary-400 transition-colors;
+  }
 }
