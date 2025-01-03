@@ -6,6 +6,12 @@ export interface PostData {
   sign: PostSignData
 }
 
+export type PostRequestBody = readonly {
+  plainText: string
+  publicKey: string
+  signKey: string
+}
+
 export type PostSignData = {
   has: false
 } | {
