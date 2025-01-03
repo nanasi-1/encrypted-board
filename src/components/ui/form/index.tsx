@@ -56,3 +56,16 @@ export function SubmitButton({ className, ...props }
     <button type="submit" className={_className} {...props} />
   )
 }
+
+export function FormSection({ className, ...props }
+  : React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+) {
+  const _className = classnameBuilder()
+    .addByArray(['mb-5'])
+    .addByArray(className?.split(' '))
+    .build()
+
+  return (
+    <div className={_className} {...props} />
+  )
+}
