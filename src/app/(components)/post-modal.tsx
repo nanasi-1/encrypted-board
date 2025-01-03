@@ -1,6 +1,6 @@
 'use client'
 
-import { FormInput, FormLabel, FormTextarea } from "@/components/ui/form";
+import { FormInput, FormLabel, FormTextarea, SubmitButton } from "@/components/ui/form";
 import { ModalTitle } from "@/components/ui/modal/ModalUI";
 import { FormEventHandler, useState } from "react";
 
@@ -41,14 +41,14 @@ export default function PostModal() {
       <form onSubmit={handleSubmit}>
         <div>
           <FormLabel>平文</FormLabel>
-          <FormTextarea value={value} onChange={onChange} required />
+          <FormTextarea value={value} onChange={onChange} required placeholder="test-test" />
           {error && <span>{error}</span>}
         </div>
         <div>
           <FormLabel>公開鍵</FormLabel>
           <FormInput type="text" required placeholder="Hello World!" />
         </div>
-        <button type="submit">投稿</button>
+        <SubmitButton>投稿</SubmitButton>
       </form>
     </>
   )
