@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   description: "暗号しか投稿できない匿名掲示板",
   openGraph: {
     images: [{
-      url: 'OGP.png'
+      url: `${process.env.URL}/OGP.png`,
     }]
   }
 };
