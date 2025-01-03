@@ -74,7 +74,7 @@ export function FormSection({ className, ...props }
 }
 
 export function ValidationError({ className, ...props }
-  : React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+  : React.DetailedHTMLProps<React.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>
 ) {
   const _className = classnameBuilder()
     .addByArray(['text-red-500', 'text-sm', 'mt-1', 'block'])
@@ -84,6 +84,21 @@ export function ValidationError({ className, ...props }
   return (
     <span className={_className} {...props}>
       ERROR: {props.children}
+    </span>
+  )
+}
+
+export function OptionText({ className, ...props }
+  : React.DetailedHTMLProps<React.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>
+) {
+  const _className = classnameBuilder()
+    .addByArray(['text-xs', 'text-stone-400', 'mt-1'])
+    .addByArray(className?.split(' '))
+    .build()
+
+  return (
+    <span className={_className} {...props}>
+      {props.children ?? '（オプション）'}
     </span>
   )
 }

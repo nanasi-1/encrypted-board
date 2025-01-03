@@ -1,6 +1,6 @@
 'use client'
 
-import { FormInput, FormLabel, FormSection, FormTextarea, SubmitButton, ValidationError } from "@/components/ui/form";
+import { FormInput, FormLabel, FormSection, FormTextarea, OptionText, SubmitButton, ValidationError } from "@/components/ui/form";
 import { ModalTitle } from "@/components/ui/modal/ModalUI";
 import { FormEventHandler, useState } from "react";
 
@@ -55,7 +55,9 @@ export default function PostModal() {
           <FormInput type="text" required placeholder="暗号化に使う公開鍵を入力..." />
         </FormSection>
         <FormSection>
-          <FormLabel>署名</FormLabel>
+          <FormLabel>
+            署名<OptionText />
+          </FormLabel>
           <FormInput type="text" placeholder="署名鍵を入力..." />
         </FormSection>
         <hr className="my-8 border-gray-400" />
