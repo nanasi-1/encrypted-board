@@ -4,13 +4,6 @@ import { FormInput, FormLabel, FormSection, FormTextarea, OptionText, SubmitButt
 import { ModalTitle } from "@/components/ui/modal/ModalUI";
 import { FormEventHandler, useState } from "react";
 
-const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
-  const formData = new FormData(event.currentTarget)
-  console.log([...formData.entries()])
-  console.log(formData.get('post-plain-text'))
-  debugger
-}
-
 function validatePlainText(text: string) {
   const MAX_PLAIN_TEXT_LENGTH = 255
 
@@ -30,10 +23,26 @@ function validatePlainText(text: string) {
 export default function PostModal() {
   const [error, setError] = useState<React.ReactNode | null>(null)
   const [value, setValue] = useState('')
+  const [nowPosted, setNowPosted] = useState(false)
 
-  const onChange: React.ChangeEventHandler<HTMLTextAreaElement> = (event) => {
+  const handleChange: React.ChangeEventHandler<HTMLTextAreaElement> = (event) => {
     setValue(event.target.value)
     setError(validatePlainText(event.target.value))
+  }
+
+  const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
+    event.preventDefault()
+    setNowPosted(true)
+    const formData = new FormData(event.currentTarget)
+    const post = {
+      plainText: formData.get('plain-text') as string,
+      publicKey: formData.get('public-key') as string,
+      signKey: formData.get('sign-key') as string,
+    }
+    console.log(post)
+    // ここでAPI呼び出し
+    await new Promise(resolve => setTimeout(resolve, 3000))
+    setNowPosted(false)
   }
 
   return (
@@ -44,8 +53,9 @@ export default function PostModal() {
           <FormLabel htmlFor="post-plain-text">平文</FormLabel>
           <FormTextarea 
             id="post-plain-text"
+            name="plain-text"
             value={value} 
-            onChange={onChange} 
+            onChange={handleChange} 
             required 
             placeholder="投稿したいメッセージを入力..."
             className={error ? 'border-red-500' : ''}
@@ -56,6 +66,7 @@ export default function PostModal() {
           <FormLabel htmlFor="post-public-key">公開鍵</FormLabel>
           <FormInput 
             id="post-public-key"
+            name="public-key"
             type="text" 
             required 
             placeholder="暗号化に使う公開鍵を入力..." 
@@ -63,16 +74,19 @@ export default function PostModal() {
         </FormSection>
         <FormSection>
           <FormLabel htmlFor="post-sign-key">
-            署名<OptionText />
+            署名鍵<OptionText />
           </FormLabel>
           <FormInput 
             id="post-sign-key"
+            name="sign-key"
             type="text" 
             placeholder="署名鍵を入力..." 
           />
         </FormSection>
         <hr className="my-8 border-gray-400" />
-        <SubmitButton disabled={!!error}>投稿</SubmitButton>
+        <SubmitButton disabled={!!error || nowPosted}>
+          {nowPosted ? '投稿中...' : '投稿'}
+        </SubmitButton>
       </form>
     </>
   )
