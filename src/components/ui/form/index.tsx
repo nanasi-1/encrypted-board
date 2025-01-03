@@ -69,3 +69,18 @@ export function FormSection({ className, ...props }
     <div className={_className} {...props} />
   )
 }
+
+export function ValidationError({ className, ...props }
+  : React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+) {
+  const _className = classnameBuilder()
+    .addByArray([])
+    .addByArray(className?.split(' '))
+    .build()
+
+  return (
+    <span className={_className + ' text-red-500 text-sm mt-1 block'} {...props}>
+      ERROR: {props.children}
+    </span>
+  )
+}
