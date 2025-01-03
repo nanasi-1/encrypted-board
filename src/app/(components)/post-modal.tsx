@@ -7,6 +7,7 @@ import { FormEventHandler, useState } from "react";
 const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
   const formData = new FormData(event.currentTarget)
   console.log([...formData.entries()])
+  console.log(formData.get('post-plain-text'))
   debugger
 }
 
@@ -40,8 +41,9 @@ export default function PostModal() {
       <ModalTitle className="mb-5">投稿</ModalTitle>
       <form onSubmit={handleSubmit}>
         <FormSection>
-          <FormLabel>平文</FormLabel>
+          <FormLabel htmlFor="post-plain-text">平文</FormLabel>
           <FormTextarea 
+            id="post-plain-text"
             value={value} 
             onChange={onChange} 
             required 
@@ -51,14 +53,23 @@ export default function PostModal() {
           {error && <ValidationError>{error}</ValidationError>}
         </FormSection>
         <FormSection>
-          <FormLabel>公開鍵</FormLabel>
-          <FormInput type="text" required placeholder="暗号化に使う公開鍵を入力..." />
+          <FormLabel htmlFor="post-public-key">公開鍵</FormLabel>
+          <FormInput 
+            id="post-public-key"
+            type="text" 
+            required 
+            placeholder="暗号化に使う公開鍵を入力..." 
+          />
         </FormSection>
         <FormSection>
-          <FormLabel>
+          <FormLabel htmlFor="post-sign-key">
             署名<OptionText />
           </FormLabel>
-          <FormInput type="text" placeholder="署名鍵を入力..." />
+          <FormInput 
+            id="post-sign-key"
+            type="text" 
+            placeholder="署名鍵を入力..." 
+          />
         </FormSection>
         <hr className="my-8 border-gray-400" />
         <SubmitButton disabled={!!error}>投稿</SubmitButton>
