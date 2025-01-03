@@ -18,6 +18,11 @@ export default async function Home({ searchParams }: {
           <Icones Icon={LockIcon} color="primary" position="left-of-text" />
           <span>暗号掲示板は現在準備中です</span>
         </p>
+        <div>
+          <h2>Environments</h2>
+          <p>{process.env.URL ?? 'undefined'}</p>
+          <p>{process.env.API_ENDPOINT ?? 'undefined'}</p>
+        </div>
         <p>
           <a href="https://github.com/nanasi-1/encrypted-board" target="_blank" className="text-secondary underline">GitHub</a>
         </p>
