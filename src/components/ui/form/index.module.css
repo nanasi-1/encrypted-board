@@ -1,0 +1,19 @@
+.submit-button {
+  /* base */
+  @apply bg-stone-750 py-1.5 px-3.5 rounded-md;
+  /* border & text */
+  @apply border border-primary text-base text-primary;
+  /* other */
+  @apply transition-colors;
+  
+  &:disabled {
+    @apply cursor-not-allowed border-stone-400 text-stone-400;
+    &:hover {
+      @apply border-stone-400 text-stone-400;
+    }
+  }
+
+  &:hover {
+    @apply border-secondary-400 text-secondary-400;
+  }
+}

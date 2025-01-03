@@ -1,3 +1,4 @@
+import { classnameBuilder } from "@/utils/classname-builder"
 import { Icones, CloseIcon } from "../icons"
 import styles from './index.module.css'
 
@@ -18,4 +19,15 @@ export default function ModalUI({ children, onClose }: {
       </div>
     </div>
   )
+}
+
+export function ModalTitle({ className, ...props }
+  : React.DetailedHTMLProps<React.HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>
+) {
+  const _className = classnameBuilder()
+    .addByArray(['text-primary', 'font-bold', 'text-xl', 'mb-3'])
+    .addByArray(className?.split(' '))
+    .build()
+
+  return <h2 className={_className} {...props} />
 }
