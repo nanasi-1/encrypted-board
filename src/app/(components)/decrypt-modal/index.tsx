@@ -6,7 +6,7 @@ export function useDecryptModal() {
   const { open } = useModal()
 
   const openResultModal = async (cipher: string, privateKey: string) => {
-    const plainText = cipher // ここに復号処理
+    const plainText = 'Hello Crypto!' // ここに復号処理
     await new Promise(resolve => setTimeout(resolve, 1000))
     open(<ResultModal plainText={plainText} />)
   }
