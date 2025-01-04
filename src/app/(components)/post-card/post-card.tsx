@@ -15,7 +15,7 @@ export default function PostCard({ post }: { post: PostData }) {
           <Icones Icon={LockIcon} position="left-of-text" />
           <Cipher color='white'>{post.publicKeyDigest}</Cipher>
         </span>
-        <Menus cipher={post.body} />
+        <Menus post={post} />
       </div>
       <Cipher className={styles.cipher}>{post.body}</Cipher>
       {post.sign.has ? <VerifyText text={post.sign.signKeyDigest} /> : null}

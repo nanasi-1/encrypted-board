@@ -11,8 +11,8 @@ export function useDecryptModal() {
     open(<ResultModal plainText={plainText} />)
   }
 
-  const openModal = (cipher: string) => {
-    open(<DecryptModal onSubmit={key => openResultModal(cipher, key)} />)
+  const openModal = (cipher: string, unique: number) => {
+    open(<DecryptModal key={unique} onSubmit={key => openResultModal(cipher, key)} />)
   }
 
   return openModal

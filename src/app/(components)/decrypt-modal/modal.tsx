@@ -13,7 +13,6 @@ export default function DecryptModal({ onSubmit }: {
     event.preventDefault()
     setPending(true)
     const formData = new FormData(event.currentTarget)
-    console.log([...formData.entries()])
     await onSubmit?.(formData.get("private-key") as string)
     setPending(false) // ↑で別のモーダルが開く場合は実行されない
   }
