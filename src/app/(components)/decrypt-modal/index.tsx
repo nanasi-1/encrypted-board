@@ -22,9 +22,19 @@ export function useDecryptModal() {
       const plainText = await decrypt(post.body, cryptoKey)
       open(<ResultModal plainText={plainText} />)
     } catch (error) {
-      const privateKeyDigest = privateKey.slice(0, 20) // ダイジェストを計算
-      openError(<OperationErrorModal publicKey={post.publicKeyDigest} privateKey={privateKeyDigest} />)
-      // openError(<InvalidErrorModal privateKey={privateKey} />)
+      if (error instanceof Error && (
+        error.name === 'InvalidCharacterError' ||
+        error.name === 'DataError'
+      )) {
+        openError(<InvalidErrorModal privateKey={privateKey} />)
+        return
+      }
+      if (error instanceof Error && error.name === 'OperationError') {
+        const privateKeyDigest = privateKey.slice(0, 20) // ダイジェストを計算
+        openError(<OperationErrorModal publicKey={post.publicKeyDigest} privateKey={privateKeyDigest} />)
+        return
+      }
+      throw error // 予期せぬエラー
     }
   }
 

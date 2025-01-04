@@ -74,8 +74,14 @@ export function OperationErrorModal({ publicKey, privateKey }: {
       title="アクセスが拒否されました" 
       message="使用された秘密鍵と暗号化に用いられた公開鍵が一致しません。"
     >
-      <div>{publicKey}</div>
-      <div>{privateKey}</div>
+      <div className="border px-3 py-2 border-primary mb-4">
+        <span className="mr-1">公開鍵:</span>
+        <Cipher className="text-white">{publicKey}</Cipher>
+      </div>
+      <div className="border px-3 py-2 border-red-600">
+        <span className="mr-1">秘密鍵:</span>
+        <Cipher className="text-red-600">{privateKey}</Cipher>
+      </div>
     </ErrorModal>
   )
 }
