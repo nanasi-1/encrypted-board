@@ -7,6 +7,7 @@ import { ModalTitle } from "@/components/ui/modal/ModalUI"
 
 import wrapperBases from "@/components/ui/modal/index.module.css"
 import customStyles from "./error-modal.module.css"
+import Cipher from "@/components/ui/cipher"
 
 // ModalUIに相当するラッパー
 export function ErrorModalWrapper({ children }: {
@@ -49,10 +50,16 @@ function ErrorModal({ children, title, message }: {
 }
 
 /** Base64エンコードでなかったときのモーダル */
-export function InvalidErrorModal() {
+export function InvalidErrorModal({ privateKey }: { privateKey: string }) {
   return (
-    <ErrorModal title="a" message="a">
-      <p>入力されたテキストはBase64エンコードされていま せん。</p>
+    <ErrorModal 
+      title="解析に失敗しました" 
+      message="解読不可能な秘密鍵を受信しました。Base64の鍵が必要です。"
+    >
+      <h3 className="font-bold mb-3">秘密鍵</h3>
+      <div className="border-red-600 border h-24 px-3 py-2 break-words overflow-y-scroll">
+        <Cipher className="text-white">{privateKey}</Cipher>
+      </div>
     </ErrorModal>
   )
 }
@@ -60,7 +67,7 @@ export function InvalidErrorModal() {
 /** 鍵が一致しなかったときのモーダル */
 export function OperationErrorModal() {
   return (
-    <ErrorModal title="a" message="a">
+    <ErrorModal title="a" message="5">
       <p>入力されたテキストはBase64エンコードされていま せん。</p>
     </ErrorModal>
   )

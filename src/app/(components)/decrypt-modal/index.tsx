@@ -21,7 +21,7 @@ export function useDecryptModal() {
       const plainText = await decrypt(cipher, cryptoKey)
       open(<ResultModal plainText={plainText} />)
     } catch (error) {
-      openError(<InvalidErrorModal />)
+      openError(<InvalidErrorModal privateKey={privateKey} />)
     }
   }
 
