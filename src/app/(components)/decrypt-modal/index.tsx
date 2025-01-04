@@ -3,10 +3,11 @@ import DecryptModal from "./modal";
 import ResultModal from "./result-modal";
 
 export function useDecryptModal() {
-  const { open, close } = useModal()
+  const { open } = useModal()
 
   const openResultModal = async (cipher: string, privateKey: string) => {
     const plainText = cipher // ここに復号処理
+    await new Promise(resolve => setTimeout(resolve, 1000))
     open(<ResultModal plainText={plainText} />)
   }
 
