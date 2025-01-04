@@ -7,11 +7,11 @@ import { useModalContext } from "@/components/ui/modal/context";
 import { ErrorModalWrapper, InvalidErrorModal, OperationErrorModal } from "./error-modal";
 
 export function useDecryptModal() {
-  const { open, close } = useModal()
+  const { open } = useModal()
   const { setModalComponent, dialogRef } = useModalContext()
 
   const openError = (children: React.ReactNode) => {
-    setModalComponent(<ErrorModalWrapper onClose={close}>{children}</ErrorModalWrapper>)
+    setModalComponent(<ErrorModalWrapper>{children}</ErrorModalWrapper>)
     dialogRef.current?.showModal()
   }
 
