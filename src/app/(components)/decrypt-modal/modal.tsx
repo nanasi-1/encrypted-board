@@ -1,6 +1,6 @@
 'use client'
 
-import { FormInput, SubmitButton } from "@/components/ui/form";
+import { FormInput, FormLabel, FormSection, SubmitButton } from "@/components/ui/form";
 import { ModalTitle } from "@/components/ui/modal/ModalUI";
 import { useState } from "react";
 
@@ -20,9 +20,16 @@ export default function DecryptModal({ onSubmit }: {
 
   return (
     <div>
-      <ModalTitle>Decrypt Modal</ModalTitle>
+      <ModalTitle>復号</ModalTitle>
       <form onSubmit={handleSubmit}>
-        <FormInput />
+        <FormSection className="mb-6">
+          <FormLabel htmlFor="decrypt-private-key">秘密鍵</FormLabel>
+          <FormInput
+            id="decrypt-private-key"
+            name="private-key"
+            required
+          />
+        </FormSection>
         <SubmitButton disabled={pending}>
           {pending ? "復号中..." : "復号"}
         </SubmitButton>
