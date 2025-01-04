@@ -1,3 +1,7 @@
 .content {
   @apply border-red-600;
 }
+
+.submit-button {
+  @apply text-red-500 border-red-600 mt-6;
+}

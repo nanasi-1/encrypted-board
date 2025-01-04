@@ -6,7 +6,7 @@ import { useModal } from "@/components/ui/modal"
 import { ModalTitle } from "@/components/ui/modal/ModalUI"
 
 import wrapperBases from "@/components/ui/modal/index.module.css"
-import wrapperStyles from "./error-modal.module.css"
+import customStyles from "./error-modal.module.css"
 
 // ModalUIに相当するラッパー
 export function ErrorModalWrapper({ children }: {
@@ -16,7 +16,7 @@ export function ErrorModalWrapper({ children }: {
 
   return (
     <div className={wrapperBases['wrapper']} onClick={close}>
-      <div className={wrapperBases['content'] + ' ' + wrapperStyles['content']} onClick={e => e.stopPropagation()}>
+      <div className={wrapperBases['content'] + ' ' + customStyles['content']} onClick={e => e.stopPropagation()}>
         <button className={wrapperBases['close-button']} onClick={close}>
           <Icones Icon={CloseIcon} fontSize={24} color="red-600" />
         </button>
@@ -26,8 +26,10 @@ export function ErrorModalWrapper({ children }: {
   )
 }
 
-function ErrorModal({ children }: {
+function ErrorModal({ children, title, message }: {
   children?: React.ReactNode,
+  title: React.ReactNode
+  message: React.ReactNode
 }) {
   const { close } = useModal()
 
@@ -36,13 +38,12 @@ function ErrorModal({ children }: {
       <ModalTitle className="text-red-600">
         DECRYPTION ERROR!
       </ModalTitle>
-      <div className="mb-7">
-        <h3 className="font-bold mb-6">エラー内容</h3>
-        <div className="border-red-600 border-y break-words px-3 py-3 min-h-28">
-          {children}
-        </div>
+      <div className="mb-5">
+        <h3 className="font-bold mb-1">[ {title} ]</h3>
+        <p>{message}</p>
       </div>
-      <SubmitButton type="button" onClick={close}>OK</SubmitButton>
+      {children}
+      <SubmitButton type="button" onClick={close} className={customStyles['submit-button']}>OK</SubmitButton>
     </div>
   )
 }
@@ -50,7 +51,7 @@ function ErrorModal({ children }: {
 /** Base64エンコードでなかったときのモーダル */
 export function InvalidErrorModal() {
   return (
-    <ErrorModal>
+    <ErrorModal title="a" message="a">
       <p>入力されたテキストはBase64エンコードされていま せん。</p>
     </ErrorModal>
   )
@@ -59,6 +60,8 @@ export function InvalidErrorModal() {
 /** 鍵が一致しなかったときのモーダル */
 export function OperationErrorModal() {
   return (
-    <div></div>
+    <ErrorModal title="a" message="a">
+      <p>入力されたテキストはBase64エンコードされていま せん。</p>
+    </ErrorModal>
   )
 }
