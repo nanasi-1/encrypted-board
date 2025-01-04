@@ -2,12 +2,11 @@
 
 import { Icones, KeyIcon, MenuDotsIcon } from '@/components/ui/icons'
 import styles from './post-card.module.css'
+import { useDecryptModal } from '../decrypt-modal'
 
-export default function Menus() {
-  // 処理
-  const onKeyClick = () => {
-    console.log('key clicked')
-  }
+export default function Menus({ cipher }: { cipher: string }) {
+  const openModal = useDecryptModal()
+  const onKeyClick = () => openModal(cipher)
 
   return (
     <UI onKeyClick={onKeyClick} />

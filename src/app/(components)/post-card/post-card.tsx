@@ -6,16 +6,16 @@ import { PostData } from '@/types'
 
 /** 各投稿のコンポーネント  */
 // `Post`だと投稿を意味する`post`と名前が被るので`PostCard`とした
-export default function PostCard({ post }: { post: PostData}) {
+export default function PostCard({ post }: { post: PostData }) {
   return (
     <div className={styles['wrapper']}>
       <div className={styles['top-line']}>
         <span className={styles['date']}>{post.createdAt}</span>
         <span className={styles['public-key']}>
           <Icones Icon={LockIcon} position="left-of-text" />
-          <Cipher color='white'>wAcrImJaLu2iwSz+q428Z7</Cipher>
+          <Cipher color='white'>{post.publicKeyDigest}</Cipher>
         </span>
-        <Menus />
+        <Menus cipher={post.body} />
       </div>
       <Cipher className={styles.cipher}>{post.body}</Cipher>
       {post.sign.has ? <VerifyText text={post.sign.signKeyDigest} /> : null}
