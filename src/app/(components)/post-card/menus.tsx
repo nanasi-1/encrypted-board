@@ -7,7 +7,7 @@ import { PostData } from '@/types'
 
 export default function Menus({ post }: { post: PostData }) {
   const openModal = useDecryptModal()
-  const onKeyClick = () => openModal(post.body, post.id)
+  const onKeyClick = () => openModal(post)
 
   return (
     <UI onKeyClick={onKeyClick} />

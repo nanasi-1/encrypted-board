@@ -5,6 +5,7 @@ import { decrypt } from "@/lib/encrypt";
 import { importPrivateKey } from "@/lib/import-export-key";
 import { useModalContext } from "@/components/ui/modal/context";
 import { ErrorModalWrapper, InvalidErrorModal, OperationErrorModal } from "./error-modal";
+import { PostData } from "@/types";
 
 export function useDecryptModal() {
   const { open } = useModal()
@@ -15,18 +16,20 @@ export function useDecryptModal() {
     dialogRef.current?.showModal()
   }
 
-  const openResult = async (cipher: string, privateKey: string) => {
+  const openResult = async (post: PostData, privateKey: string) => {
     try {
       const cryptoKey = await importPrivateKey(privateKey, false)
-      const plainText = await decrypt(cipher, cryptoKey)
+      const plainText = await decrypt(post.body, cryptoKey)
       open(<ResultModal plainText={plainText} />)
     } catch (error) {
-      openError(<InvalidErrorModal privateKey={privateKey} />)
+      const privateKeyDigest = privateKey.slice(0, 20) // ダイジェストを計算
+      openError(<OperationErrorModal publicKey={post.publicKeyDigest} privateKey={privateKeyDigest} />)
+      // openError(<InvalidErrorModal privateKey={privateKey} />)
     }
   }
 
-  const openModal = (cipher: string, unique: number) => {
-    open(<DecryptModal key={unique} onSubmit={key => openResult(cipher, key)} />)
+  const openModal = (post: PostData) => {
+    open(<DecryptModal key={post.id} onSubmit={key => openResult(post, key)} />)
   }
 
   return openModal

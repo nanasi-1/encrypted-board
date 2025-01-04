@@ -65,10 +65,17 @@ export function InvalidErrorModal({ privateKey }: { privateKey: string }) {
 }
 
 /** 鍵が一致しなかったときのモーダル */
-export function OperationErrorModal() {
+export function OperationErrorModal({ publicKey, privateKey }: { 
+  publicKey: string
+  privateKey: string 
+}) {
   return (
-    <ErrorModal title="a" message="5">
-      <p>入力されたテキストはBase64エンコードされていま せん。</p>
+    <ErrorModal 
+      title="アクセスが拒否されました" 
+      message="使用された秘密鍵と暗号化に用いられた公開鍵が一致しません。"
+    >
+      <div>{publicKey}</div>
+      <div>{privateKey}</div>
     </ErrorModal>
   )
 }
