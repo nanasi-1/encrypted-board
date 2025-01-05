@@ -41,10 +41,12 @@ verify_keys {
 `created_at`にインデックスを貼るといいらしい by Copilot
 
 ## リレーション
+- 一つの`post`に対して、0~1つの`verify-key`がある
+- 一つの`verify_key`に対して、0~*つの`post`がある
 
 ```mermaid
 erDiagram
-posts |o--o| verify-keys : "a"
+posts ||--o| verify_keys : "一つのPostには0または1つのVerifyKeyが関連する"
 
 posts {
   string verify_key_digest "null可"
