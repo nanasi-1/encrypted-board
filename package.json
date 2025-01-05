@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@prisma/client": "^6.1.0",
