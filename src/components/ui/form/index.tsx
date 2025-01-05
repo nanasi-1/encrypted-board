@@ -5,12 +5,14 @@ export function FormLabel({ className, ...props }
   : React.DetailedHTMLProps<React.LabelHTMLAttributes<HTMLLabelElement>, HTMLLabelElement>
 ) {
   const _className = classnameBuilder()
-    .addByArray(['block', 'font-bold', 'text-base', 'mb-3'])
+    .addByArray(['font-bold', 'text-base', 'mb-3'])
     .addByArray(className?.split(' '))
     .build()
 
   return (
-    <label className={_className} {...props} />
+    <div className={_className}>
+      <label className="cursor-pointer" {...props} />
+    </div>
   )
 }
 
