@@ -1,6 +1,7 @@
 import Pagination from "@/components/ui/pagination/pagination";
 import PostCard from "./post-card/post-card";
 import { PostData } from "@/types";
+import { getFirstPost } from "../actions";
 
 export default async function Posts({ currentPage }: {
   currentPage: number
@@ -8,8 +9,11 @@ export default async function Posts({ currentPage }: {
   const hasNext = currentPage < 4 // 仮
   const posts = postsSeedData // ページング済み
 
+  const first = await getFirstPost()
+
   return (
     <div className="flex items-center flex-col gap-y-7">
+      <PostCard post={first} />
       {posts.map(post => (
         <PostCard key={post.id} post={post} />
       ))}
