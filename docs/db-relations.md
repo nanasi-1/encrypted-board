@@ -13,7 +13,7 @@ erDiagram
 posts {
   bigint id PK
   string encrypted_body
-  string encrypted_key_digest
+  string public_key_digest
   string verify_key_digest "null可"
   cidr ip_address
   timestamp created_at
@@ -22,13 +22,13 @@ posts {
 
 `created_at`にインデックスを貼るといいらしい by Copilot
 
-### `verify-keys`
+### `verify_keys`
 本人確認用の認証システムに使う、検証用鍵。
 署名付きの投稿がされるたびにここから鍵を引っ張り出し、検証する。
 
 ```mermaid
 erDiagram
-verify-keys {
+verify_keys {
   string digest PK
   string verify_key
   cidr ip_address
