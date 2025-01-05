@@ -34,7 +34,7 @@ const postsSeedData: readonly PostData[] = [
     publicKeyDigest: "wAcrImJaLu2iwSz+q428Z7",
     sign: {
       has: true,
-      signKeyDigest: "mJ+DKws",
+      verifyKey: "mJ+DKws",
     },
   }, {
     id: 2,
@@ -43,7 +43,7 @@ const postsSeedData: readonly PostData[] = [
     publicKeyDigest: "wAcrImJaLu2iwSz+q428Z7",
     sign: {
       has: true,
-      signKeyDigest: "mJ+DKws",
+      verifyKey: "mJ+DKws",
     },
   }, {
     id: 3,
@@ -60,7 +60,7 @@ const postsSeedData: readonly PostData[] = [
     publicKeyDigest: "vBxhCmQjPu3czFi+o539A4",
     sign: {
       has: true,
-      signKeyDigest: "kL+8Dhs",
+      verifyKey: "kL+8Dhs",
     },
   }, {
     id: 5,
@@ -85,7 +85,7 @@ const postsSeedData: readonly PostData[] = [
     publicKeyDigest: "wAcrImJaLu2iwSz+q428Z7",
     sign: {
       has: true,
-      signKeyDigest: "nM7kPbw",
+      verifyKey: "nM7kPbw",
     },
   }, {
     id: 8,
@@ -94,7 +94,7 @@ const postsSeedData: readonly PostData[] = [
     publicKeyDigest: "wAcrImJaLu2iwSz+q428Z7",
     sign: {
       has: true,
-      signKeyDigest: "nM7kPbw",
+      verifyKey: "nM7kPbw",
     },
   }, {
     id: 9,
@@ -111,7 +111,7 @@ const postsSeedData: readonly PostData[] = [
     publicKeyDigest: "tBjdKmTiZy4axFg+q815K6",
     sign: {
       has: true,
-      signKeyDigest: "jH+XK7u",
+      verifyKey: "jH+XK7u",
     },
   }, {
     id: 11,
@@ -128,7 +128,7 @@ const postsSeedData: readonly PostData[] = [
     publicKeyDigest: "tBjdKmTiZy4axFg+q815K6",
     sign: {
       has: true,
-      signKeyDigest: "jH+XK7u",
+      verifyKey: "jH+XK7u",
     },
   }, {
     id: 13,
@@ -145,7 +145,7 @@ const postsSeedData: readonly PostData[] = [
     publicKeyDigest: "vBxhCmQjPu3czFi+o539A4",
     sign: {
       has: true,
-      signKeyDigest: "kL+8Dhs",
+      verifyKey: "kL+8Dhs",
     },
   }
 ]

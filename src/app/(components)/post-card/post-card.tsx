@@ -18,7 +18,7 @@ export default function PostCard({ post }: { post: PostData }) {
         <Menus post={post} />
       </div>
       <Cipher className={styles.cipher}>{post.body}</Cipher>
-      {post.sign.has ? <VerifyText text={post.sign.signKeyDigest} /> : null}
+      {post.sign.has ? <VerifyText text={post.sign.verifyKey} /> : null}
     </div>
   )
 }

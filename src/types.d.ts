@@ -28,5 +28,5 @@ export type PostSignData = {
   readonly has: false
 } | {
   readonly has: true
-  readonly signKeyDigest: string
+  readonly verifyKey: string
 }
