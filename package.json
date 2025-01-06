@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "type-check": "tsc --noEmit",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "dev-db:run": "bash docker/db/start-db.sh && prisma db push",
+    "dev-db:build": "docker image build -t encrypted-postgres -f docker/db/db.Dockerfile ."
   },
   "dependencies": {
     "@prisma/client": "^6.1.0",
