@@ -1,20 +1,32 @@
 export interface PostData {
-  id: number
-  createdAt: string // 日付を使った処理いらないしこれでいいや
-  body: string
-  publicKeyDigest: string
-  sign: PostSignData
+  readonly id: number
+  readonly createdAt: string // 日付を使った処理いらないしこれでいいや
+  readonly body: string
+  readonly publicKeyDigest: string
+  readonly sign: PostSignData
 }
 
-export type PostRequestBody = readonly {
-  plainText: string
-  publicKey: string
-  signKey: string
+export interface PostFormData {
+  readonly plainText: string
+  readonly publicKey: string
+  readonly signKey: string
+}
+
+export type PostRequestBody =  {
+  readonly plainText: string
+  readonly publicKey: string
+  readonly sign: {
+    readonly has: false
+  } | {
+    readonly has: true
+    readonly signKeyDigest: string
+    readonly signature: string
+  }
 }
 
 export type PostSignData = {
-  has: false
+  readonly has: false
 } | {
-  has: true
-  signKeyDigest: string
+  readonly has: true
+  readonly verifyKey: string
 }

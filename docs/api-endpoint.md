@@ -48,11 +48,11 @@ Request Body:
 ```json
 {
   "body": "string",
-  "public-key": "string",
+  "publicKey": "string",
   "sign": { // 署名
-    "is": true | false,
+    "has": true | false,
     "signature": "string",
-    "sign-key-digest": "string",
+    "signKeyDigest": "string",
   }
 }
 ```
@@ -60,6 +60,7 @@ Request Body:
 Response:
 
 - `200`: 正常に投稿完了
+- `400`: バリデーションエラー
 - `401`: `sign`での認証に失敗
 
 #### `GET /api/posts`
@@ -71,12 +72,20 @@ Request Query:
 Response:
 ```json
 {
-  "posts": {
-    "encrypted-body": "string",
-    "encrypted-key-digest": "string",
-    "verify": "string" | null
-  },
-  "has-next": true | false,
+  "posts": [
+    {
+      "id": number,
+      "createdAt": "string",
+      "body": "string",
+      "publicKeyDigest": "string",
+      "sign": {
+        "has": true | false,
+        "verifyKey": "string" | void
+      }
+    },
+    // etc...
+  ],
+  "hasNext": true | false,
 }
 ```
 
@@ -88,7 +97,7 @@ Response:
 Request Body:
 ```json
 {
-  "verify-key": "string",
+  "verifyKey": "string",
 }
 ```
 

@@ -2,7 +2,7 @@
 
 import { FormInput, FormLabel, FormSection, FormTextarea, OptionText, SubmitButton, ValidationError } from "@/components/ui/form";
 import { ModalTitle } from "@/components/ui/modal/ModalUI";
-import { PostRequestBody } from "@/types";
+import { PostFormData } from "@/types";
 import { useRouter } from "next/navigation";
 import { FormEventHandler, useState } from "react";
 
@@ -23,7 +23,7 @@ function validatePlainText(text: string) {
 }
 
 export default function PostModal({ onSubmit }: { 
-  onSubmit: (post: PostRequestBody) => void | Promise<void> 
+  onSubmit: (post: PostFormData) => void | Promise<void> 
 }) {
   const [error, setError] = useState<React.ReactNode | null>(null)
   const [value, setValue] = useState('')
@@ -39,7 +39,7 @@ export default function PostModal({ onSubmit }: {
     event.preventDefault()
     setNowPosted(true)
     const formData = new FormData(event.currentTarget)
-    const post: PostRequestBody = {
+    const post: PostFormData = {
       plainText: formData.get('plain-text') as string,
       publicKey: formData.get('public-key') as string,
       signKey: formData.get('sign-key') as string,

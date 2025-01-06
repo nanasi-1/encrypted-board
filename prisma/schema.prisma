@@ -1,0 +1,38 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Post {
+  id                BigInt   @id @default(autoincrement())
+  encrypted_body    String   @db.Text
+  public_key_digest String   @db.Text
+  verify_key_digest String?  @db.VarChar(128)
+  ip_address        String
+  created_at        DateTime
+
+  verify_key VerifyKey? @relation(fields: [verify_key_digest], references: [digest], onDelete: SetNull)
+
+  @@map(name: "posts")
+}
+
+model VerifyKey {
+  digest     String   @id @db.VarChar(128)
+  verify_key String   @db.Text
+  ip_address String
+  created_at DateTime
+
+  post Post[]
+
+  @@map(name: "verify_keys")
+}
