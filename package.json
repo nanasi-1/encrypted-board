@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
+    "dev-api": "bun run --hot src/api/index.ts",
     "build": "next build",
     "start": "next start",
     "type-check": "tsc --noEmit",
