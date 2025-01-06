@@ -1,6 +1,9 @@
 import { Hono } from "hono";
 
+// routers
+import postsRouter from "./posts";
+
 const app = new Hono()
-  // ここに.route()を書く
+  .route('/posts', postsRouter)
 
 export default app
