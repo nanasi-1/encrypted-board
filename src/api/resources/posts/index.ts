@@ -1,9 +1,9 @@
 import { Hono } from "hono";
-import { getAllPosts } from "./database";
+import { getPostsByPage } from "./features/get-all";
 
 const app = new Hono()
   .get('/', async c => {
-    return c.json(await getAllPosts(1))
+    return c.json(await getPostsByPage(1))
   })
   .post('/', c => {
     return c.json({

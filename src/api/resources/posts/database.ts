@@ -1,15 +1,17 @@
 import client from "@/api/lib/prisma-client";
-import type { PostData, PostSignData, PostsAPIResponse } from "@/types";
+import type { PostData, PostSignData } from "@/types";
 import { Prisma } from "@prisma/client";
 
-const ONE_PAGE_POSTS = 15
-
-async function countPostPage(where?: Prisma.PostWhereInput) {
-  const count = await client.post.count({ where })
-  return Math.ceil(count / ONE_PAGE_POSTS)
+export async function countAllPost(args?: Prisma.PostCountArgs) {
+  const count = await client.post.count(args)
+  return count
 }
 
-export async function getAllPosts(page: number): Promise<PostsAPIResponse> {
+/** 
+ * 全ての投稿を取得する   
+ * **`take`の指定し忘れ**に注意
+ */
+export async function getAllPosts(args: Prisma.PostFindManyArgs): Promise<PostData[]> {
   const postsByDB = await client.post.findMany({
     select: {
       id: true,
@@ -19,8 +21,7 @@ export async function getAllPosts(page: number): Promise<PostsAPIResponse> {
       created_at: true,
       ip_address: false,
     },
-    skip: ONE_PAGE_POSTS * (page - 1),
-    take: ONE_PAGE_POSTS
+    ...args
   })
 
   const posts = postsByDB.map(db => {
@@ -37,10 +38,5 @@ export async function getAllPosts(page: number): Promise<PostsAPIResponse> {
     } satisfies PostData
   })
 
-  // テストしてない
-  const hasNext = posts.length >= ONE_PAGE_POSTS
-    ? await countPostPage() >= page
-    : false
-
-  return { posts, hasNext }
+  return posts
 }
