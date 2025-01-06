@@ -13,7 +13,7 @@ export default async function Posts({ currentPage }: {
 
   return (
     <div className="flex items-center flex-col gap-y-7">
-      <PostCard post={first} />
+      {first ? <PostCard post={first} /> : '投稿はまだありません'}
       {posts.map(post => (
         <PostCard key={post.id} post={post} />
       ))}
