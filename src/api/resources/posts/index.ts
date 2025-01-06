@@ -3,9 +3,7 @@ import { getAllPosts } from "./database";
 
 const app = new Hono()
   .get('/', async c => {
-    return c.json({
-      posts: await getAllPosts(1)
-    })
+    return c.json(await getAllPosts(1))
   })
   .post('/', c => {
     return c.json({
