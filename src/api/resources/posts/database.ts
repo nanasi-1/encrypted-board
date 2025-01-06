@@ -1,7 +1,9 @@
 import client from "@/api/lib/prisma-client";
 import type { PostData, PostSignData } from "@/types";
 
-export async function getAllPosts(): Promise<PostData[]> {
+export async function getAllPosts(page: number): Promise<PostData[]> {
+  const ONE_PAGE_POSTS = 15
+
   const posts = await client.post.findMany({
     select: {
       id: true,
@@ -10,7 +12,9 @@ export async function getAllPosts(): Promise<PostData[]> {
       verify_key_digest: true,
       created_at: true,
       ip_address: false,
-    }
+    },
+    skip: ONE_PAGE_POSTS * (page - 1),
+    take: ONE_PAGE_POSTS
   })
 
   return posts.map(db => {

@@ -1,7 +1,13 @@
 import { Hono } from "hono";
+import { getAllPosts } from "./database";
 
 const app = new Hono()
-  .get('/', c => {
+  .get('/', async c => {
+    return c.json({
+      posts: await getAllPosts(1)
+    })
+  })
+  .post('/', c => {
     return c.json({
       message: '投稿APIは準備中です'
     })
