@@ -18,8 +18,8 @@ export interface PostFormData {
 }
 
 export type PostRequestBody = {
-  readonly body: string
-  readonly publicKeyDigest: string
+  readonly plainText: string
+  readonly publicKey: string
   readonly sign: PostRequestSign
 }
 
