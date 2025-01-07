@@ -1,11 +1,10 @@
 import { Hono } from "hono";
 import { getPostsByPage } from "./features/get-all";
+import { parsePostQuery } from "./scheme";
 
 const app = new Hono()
   .get('/', async c => {
-    const rawPage = c.req.query('page')
-    // ここにpageのバリデーション
-    const page = rawPage ? parseInt(rawPage) : 1
+    const { page } = parsePostQuery(c.req.query())
     return c.json(await getPostsByPage(page))
   })
   .post('/', c => {
