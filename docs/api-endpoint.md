@@ -47,7 +47,7 @@ APIではデータベースと通信し、データを取得したり保存す�
 Request Body:
 ```json
 {
-  "body": "string",
+  "plainText": "string",
   "publicKey": "string",
   "sign": { // 署名
     "has": true | false,

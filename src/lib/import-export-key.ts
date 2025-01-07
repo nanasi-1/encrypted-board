@@ -41,11 +41,11 @@ export function exportPrivateKey(key: CryptoKey): Promise<string> {
 
 // 署名でもやることは同じだが、念の為関数を分けておく
 export function exportSignKey(key: CryptoKey): Promise<string> {
-  return exportKey('spki', key);
+  return exportKey('pkcs8', key);
 }
 
 export function exportVerifyKey(key: CryptoKey): Promise<string> {
-  return exportKey('pkcs8', key);
+  return exportKey('spki', key);
 }
 
 export function importPublicKey(base64: string, extractable: boolean): Promise<CryptoKey> {

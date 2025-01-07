@@ -6,22 +6,22 @@ const algorithm = {
   saltLength: 32,
 } as const satisfies RsaPssParams;
 
-export async function sign(plainText: string, privateKey: CryptoKey): Promise<string> {
+export async function sign(plainText: string, signKey: CryptoKey): Promise<string> {
   const textBuf = plainTextToArrayBuffer(plainText);
   const signatureBuf = await globalThis.crypto.subtle.sign(
     algorithm,
-    privateKey,
+    signKey,
     textBuf,
   );
   return arrayBufferToBase64(signatureBuf);
 }
 
-export async function verify(plainText: string, signature: string, publicKey: CryptoKey): Promise<boolean> {
+export async function verify(plainText: string, signature: string, verifyKey: CryptoKey): Promise<boolean> {
   const textBuf = plainTextToArrayBuffer(plainText);
   const signatureBuf = base64ToArrayBuffer(signature);
   return globalThis.crypto.subtle.verify(
     algorithm,
-    publicKey,
+    verifyKey,
     signatureBuf,
     textBuf,
   );
