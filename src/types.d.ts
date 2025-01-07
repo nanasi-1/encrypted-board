@@ -7,8 +7,8 @@ export interface PostData {
 }
 
 export interface PostsAPIResponse {
-  posts: PostData[],
-  hasNext: boolean
+  readonly posts: PostData[],
+  readonly hasNext: boolean
 }
 
 export interface PostFormData {
@@ -18,15 +18,17 @@ export interface PostFormData {
 }
 
 export type PostRequestBody = {
-  readonly plainText: string
-  readonly publicKey: string
-  readonly sign: {
-    readonly has: false
-  } | {
-    readonly has: true
-    readonly signKeyDigest: string
-    readonly signature: string
-  }
+  readonly body: string
+  readonly publicKeyDigest: string
+  readonly sign: PostRequestSign
+}
+
+export type PostRequestSign =  {
+  readonly has: false
+} | {
+  readonly has: true
+  readonly signKeyDigest: string
+  readonly signature: string
 }
 
 export type PostSignData = {

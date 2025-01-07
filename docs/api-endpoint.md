@@ -48,7 +48,7 @@ Request Body:
 ```json
 {
   "body": "string",
-  "publicKey": "string",
+  "publicKeyDigest": "string",
   "sign": { // 署名
     "has": true | false,
     "signature": "string",
