@@ -42,7 +42,7 @@ export async function getAllPosts(args: Prisma.PostFindManyArgs): Promise<PostDa
   return posts
 }
 
-export async function createPost(post: CreatePostInput & { readonly createdAt: Date }) {
+export async function createPost(post: CreatePostInput) {
   const data: Prisma.PostCreateInput = {
     encrypted_body: post.body,
     created_at: post.createdAt,
