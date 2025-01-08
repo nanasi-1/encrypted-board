@@ -1,6 +1,7 @@
 import { PostRequestBody } from "@/types";
 import { z } from "zod";
 import { stringToJSONSchema } from "@/api/lib/schemes/json";
+import { plainTextToArrayBuffer } from "@/lib/arrbuf-plain";
 
 export function parsePostQuery(query: Record<string, string>): z.infer<typeof scheme> {
   const scheme = z.object({
@@ -21,7 +22,10 @@ export function parsePostQuery(query: Record<string, string>): z.infer<typeof sc
 export function parsePostBody(body: string)
   : z.SafeParseReturnType<PostRequestBody | string, PostRequestBody> {
   const scheme = z.object({
-    plainText: z.string(),
+    plainText: z.string().refine(v => {
+      const KEY_BYTE_LENGTH = 256
+      return plainTextToArrayBuffer(v).byteLength + 20 * 2 + 2 < KEY_BYTE_LENGTH
+    }),
     publicKey: z.string().base64(),
     sign: z.union([
       z.object({
