@@ -17,6 +17,10 @@ export async function createPost(post: CreatePostRequired) {
   }
 
   // 暗号化
+  // TODO publicKeyの長さをチェック
+  if (false) {
+    throw new Error('InvalidKey')
+  }
   const cipher = post.plainText
   const publicKeyDigest = post.publicKey // ハッシュを計算
 
