@@ -1,8 +1,7 @@
 import { Hono } from "hono";
 import { getPostsByPage } from "./features/get-all";
-import { parsePostQuery } from "./scheme";
+import { parsePostBody, parsePostQuery } from "./scheme";
 import { createPost } from "./features/create";
-import type { CreatePostRequired } from "./types";
 
 import { getConnInfo } from "hono/vercel"; // 本番
 
@@ -13,19 +12,21 @@ const app = new Hono()
   })
   .post('/', async c => {
     const { remote: { address } } = !!process.env.VERCEL_ENV
-     ? getConnInfo(c)
-     // 普通にインポートするとビルドエラーになるので対策
-     : (await import('hono/bun')).getConnInfo(c)
-     
-    const body = await c.req.json()
+      ? getConnInfo(c)
+      // 普通にインポートするとビルドエラーになるので対策
+      : (await import('hono/bun')).getConnInfo(c)
 
-    const post: CreatePostRequired = {
-      ...body,
-      ipAddress: address ?? '' // マイグレートめんどいから空文字になった
+    const parseResult = parsePostBody(await c.req.text())
+    if(!parseResult.success) {
+      c.status(400)
+      return c.json(parseResult.error)
     }
 
     try {
-      const posted = await createPost(post)
+      const posted = await createPost({
+        ...parseResult.data,
+        ipAddress: address ?? '' // マイグレートめんどいから空文字になった
+      })
       return c.json({
         message: '正常に投稿が完了しました',
         post: posted
@@ -50,7 +51,7 @@ const app = new Hono()
       }
 
       // FailedVerify: 署名の検証に失敗した
-      if(error.message === 'FailedVerify' || error.message === 'VerifyKeyIsNotFound') {
+      if (error.message === 'FailedVerify' || error.message === 'VerifyKeyIsNotFound') {
         c.status(401)
         return c.json({
           message: '署名の検証に失敗しました'
