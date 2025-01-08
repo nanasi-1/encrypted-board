@@ -1,6 +1,7 @@
 import client from "@/api/lib/prisma-client";
 import type { PostData, PostSignData } from "@/types";
-import { Prisma } from "@prisma/client";
+import type { Prisma } from "@prisma/client";
+import type { CreatePostInput } from "./types";
 
 export async function countAllPost(args?: Prisma.PostCountArgs) {
   const count = await client.post.count(args)
@@ -39,4 +40,30 @@ export async function getAllPosts(args: Prisma.PostFindManyArgs): Promise<PostDa
   })
 
   return posts
+}
+
+export async function createPost(post: CreatePostInput) {
+  const data: Prisma.PostCreateInput = {
+    encrypted_body: post.body,
+    created_at: post.createdAt,
+    public_key_digest: post.publicKeyDigest,
+    ip_address: post.ipAddress,
+    verify_key: post.sign.has ? {
+      connect: {
+        digest: post.sign.verifyKey
+      }
+    } : undefined
+  }
+  return await client.post.create({ data })
+}
+
+export async function countPostFromIp(ipAddress: string, date: Date) {
+  return await client.post.count({
+    where: {
+      ip_address: ipAddress,
+      created_at: {
+        gte: date
+      }
+    }
+  })
 }

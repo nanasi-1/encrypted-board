@@ -1,4 +1,7 @@
+import { PostRequestBody } from "@/types";
 import { z } from "zod";
+import { stringToJSONSchema } from "@/api/lib/schemes/json";
+import { plainTextToArrayBuffer } from "@/lib/arrbuf-plain";
 
 export function parsePostQuery(query: Record<string, string>): z.infer<typeof scheme> {
   const scheme = z.object({
@@ -9,9 +12,35 @@ export function parsePostQuery(query: Record<string, string>): z.infer<typeof sc
     return result.data
   } else { // ここに到達することはないはず
     console.error('Failed to parse:', {
-      query, 
+      query,
       error: result.error
     })
     return { page: 1 }
   }
+}
+
+export function parsePostBody(body: string)
+  : z.SafeParseReturnType<PostRequestBody | string, PostRequestBody> {
+  const scheme = z.object({
+    plainText: z.string().refine(v => {
+      const KEY_BYTE_LENGTH = 256
+      return plainTextToArrayBuffer(v).byteLength + 20 * 2 + 2 < KEY_BYTE_LENGTH
+    }),
+    publicKey: z.string().base64(),
+    sign: z.union([
+      z.object({
+        has: z.literal(false)
+      }).strict(),
+      z.object({
+        has: z.literal(true),
+        signKeyDigest: z.string().base64(),
+        signature: z.string().base64()
+      }).strict()
+    ])
+  }).strict()
+
+  const json = stringToJSONSchema.safeParse(body)
+  if (!json.success) return json
+
+  return scheme.safeParse(json.data)
 }
