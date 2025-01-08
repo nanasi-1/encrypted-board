@@ -48,7 +48,11 @@ export async function createPost(post: CreatePostInput) {
     created_at: post.createdAt,
     public_key_digest: post.publicKeyDigest,
     ip_address: post.ipAddress,
-    verify_key: {}
+    verify_key: post.sign.has ? {
+      connect: {
+        digest: post.sign.verifyKey
+      }
+    } : undefined
   }
   return await client.post.create({ data })
 }
