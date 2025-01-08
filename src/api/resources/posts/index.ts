@@ -4,7 +4,6 @@ import { parsePostQuery } from "./scheme";
 import { createPost } from "./features/create";
 import type { CreatePostRequired } from "./types";
 
-import { getConnInfo as getLocalConnInfo } from "hono/bun"; // local
 import { getConnInfo } from "hono/vercel"; // 本番
 
 const app = new Hono()
@@ -15,7 +14,8 @@ const app = new Hono()
   .post('/', async c => {
     const { remote: { address } } = !!process.env.VERCEL_ENV
      ? getConnInfo(c)
-     : getLocalConnInfo(c)
+     // 普通にインポートするとビルドエラーになるので対策
+     : (await import('hono/bun')).getConnInfo(c)
      
     const body = await c.req.json()
 
