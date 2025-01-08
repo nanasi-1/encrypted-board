@@ -54,7 +54,8 @@ const app = new Hono()
       if (error.message === 'FailedVerify' || error.message === 'VerifyKeyIsNotFound') {
         c.status(401)
         return c.json({
-          message: '署名の検証に失敗しました'
+          // message: '署名の検証に失敗しました' // TODO 署名を実装したら修正
+          message: '署名機能は現在未実装です'
         })
       }
 

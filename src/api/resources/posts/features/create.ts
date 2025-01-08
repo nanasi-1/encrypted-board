@@ -56,6 +56,9 @@ async function checkIpLimit(ipAddress: string, createdAt: Date) {
 }
 
 async function verifySign(plainText: string, sign: Exclude<PostRequestSign, { has: false }>) {
+  // 認証は未実装
+  throw new Error('VerifyKeyIsNotFound')
+
   const verifyKey: CryptoKey = sign.signKeyDigest as any // 検証鍵をDBから取得する
   if (!verifyKey) throw new Error('VerifyKeyIsNotFound')
 
