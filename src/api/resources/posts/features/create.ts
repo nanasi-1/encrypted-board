@@ -52,15 +52,13 @@ async function checkIpLimit(ipAddress: string, createdAt: Date) {
   yesterday.setDate(createdAt.getDate() - 1)
   const count = await countPostFromIp(ipAddress, yesterday)
 
-  if (count >= ONE_DAY_POST_LIMIT) {
-    return false
-  } else {
-    return true
-  }
+  return count >= ONE_DAY_POST_LIMIT
 }
 
 async function verifySign(plainText: string, sign: Exclude<PostRequestSign, { has: false }>) {
   const verifyKey: CryptoKey = sign.signKeyDigest as any // 検証鍵をDBから取得する
+  if (!verifyKey) throw new Error('VerifyKeyIsNotFound')
+
   const ok = await verify(plainText, sign.signature, verifyKey)
   return ok
 }

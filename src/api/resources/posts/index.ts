@@ -24,11 +24,46 @@ const app = new Hono()
       ipAddress: address ?? '' // マイグレートめんどいから空文字になった
     }
 
-    const posted = await createPost(post)
-    return c.json({
-      message: '正常に投稿が完了しました',
-      post: posted
-    })
+    try {
+      const posted = await createPost(post)
+      return c.json({
+        message: '正常に投稿が完了しました',
+        post: posted
+      })
+    } catch (error) {
+      // Error型以外
+      if (!(error instanceof Error)) {
+        console.error(error)
+        c.status(500)
+        return c.json({
+          message: '予期せぬエラーが発生しました'
+        })
+      }
+
+      // LimitOver: 投稿数の制限を超えた
+      if (error.message === 'LimitOver') {
+        c.status(400)
+        return c.json({
+          message: '過去24時間の投稿数の制限を超しました。投稿は一日に60回までです。',
+          ipAddress: address
+        })
+      }
+
+      // FailedVerify: 署名の検証に失敗した
+      if(error.message === 'FailedVerify' || error.message === 'VerifyKeyIsNotFound') {
+        c.status(401)
+        return c.json({
+          message: '署名の検証に失敗しました'
+        })
+      }
+
+      // どれにも当てはまらない
+      console.error(error)
+      c.status(500)
+      return c.json({
+        message: '予期せぬエラーが発生しました'
+      })
+    }
   })
 
 export default app
