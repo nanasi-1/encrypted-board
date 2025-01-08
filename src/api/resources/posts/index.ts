@@ -21,12 +21,14 @@ const app = new Hono()
 
     const post: CreatePostRequired = {
       ...body,
-      ipAddress: c.req
+      ipAddress: address ?? '' // マイグレートめんどいから空文字になった
     }
 
-    // await createPost(post)
-
-    return c.json(address)
+    const posted = await createPost(post)
+    return c.json({
+      message: '正常に投稿が完了しました',
+      post: posted
+    })
   })
 
 export default app
