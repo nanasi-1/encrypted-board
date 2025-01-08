@@ -19,19 +19,21 @@ export function parsePostQuery(query: Record<string, string>): z.infer<typeof sc
 }
 
 export function parsePostBody(body: string)
-  : z.SafeParseReturnType<PostRequestBody | string, PostRequestBody> 
-{
+  : z.SafeParseReturnType<PostRequestBody | string, PostRequestBody> {
   const scheme = z.object({
     plainText: z.string(),
     publicKey: z.string().base64(),
-    sign: z.object({
-      has: z.literal(false)
-    }).or(z.object({
-      has: z.literal(true),
-      signKeyDigest: z.string().base64(),
-      signature: z.string().base64()
-    }))
-  })
+    sign: z.union([
+      z.object({
+        has: z.literal(false)
+      }).strict(),
+      z.object({
+        has: z.literal(true),
+        signKeyDigest: z.string().base64(),
+        signature: z.string().base64()
+      }).strict()
+    ])
+  }).strict()
 
   const json = stringToJSONSchema.safeParse(body)
   if (!json.success) return json
