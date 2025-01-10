@@ -1,9 +1,9 @@
 import { verify } from "@/lib/sign";
 import { countPostFromIp, createPost as addPostToDB } from "../database";
 import { CreatePostRequired } from "../types";
-import { PostData, PostRequestSign, PostSignData } from "@/types";
+import { PostData, PostRequestSign } from "@/types";
 
-export async function createPost(post: CreatePostRequired) {
+export async function createPost(post: CreatePostRequired): Promise<PostData> {
   if (post.sign.has) {
     const ok = await verifySign(post.plainText, post.sign)
     if (!ok) {
@@ -24,16 +24,14 @@ export async function createPost(post: CreatePostRequired) {
   const cipher = post.plainText
   const publicKeyDigest = post.publicKey // ハッシュを計算
 
-  const sign: PostSignData = post.sign.has
-    ? { has: true, verifyKey: post.sign.signKeyDigest }
-    : { has: false }
-
   const result = await addPostToDB({
     body: cipher,
     createdAt,
     publicKeyDigest,
     ipAddress: post.ipAddress,
-    sign
+    sign: post.sign.has
+      ? { has: true, verifyKey: post.sign.signKeyDigest }
+      : { has: false }
   })
 
   return {
@@ -48,10 +46,13 @@ export async function createPost(post: CreatePostRequired) {
   } satisfies PostData
 }
 
+/** 
+ * 過去24時間に投稿された暗号が制限を超えていないかチェック 
+ * @returns trueなら制限超過
+ */
 async function checkIpLimit(ipAddress: string, createdAt: Date) {
   const ONE_DAY_POST_LIMIT = 60
 
-  // 過去24時間に投稿された暗号を数える
   const yesterday = new Date(createdAt)
   yesterday.setDate(createdAt.getDate() - 1)
   const count = await countPostFromIp(ipAddress, yesterday)
