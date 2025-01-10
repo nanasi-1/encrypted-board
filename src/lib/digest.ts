@@ -1,11 +1,12 @@
 import { arrayBufferToBase64 } from "./arrbuf-b64"
 import { plainTextToArrayBuffer } from "./arrbuf-plain"
+import { MODULUS_LENGTH } from "./generate-key"
 import { exportPublicKey, importPrivateKey } from "./import-export-key"
 
 export async function calcPublicKeyByPrivate(privateKey: CryptoKey) {
   const algorithm: RsaHashedKeyGenParams = {
     name: "RSA-OAEP",
-    modulusLength: 2048,
+    modulusLength: MODULUS_LENGTH,
     publicExponent: new Uint8Array([1, 0, 1]),
     hash: {
       name: "SHA-256"

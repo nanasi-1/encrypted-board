@@ -1,9 +1,10 @@
-// @ts-nocheck ビルドエラー回避、後で消す
+// // @ts-nocheck ビルドエラー回避、後で消す
 
 import { Hono } from "hono";
 import { getPostsByPage } from "./features/get-all";
 import { parsePostBody, parsePostQuery } from "./scheme";
 import { createPost } from "./features/create";
+import { getPostError, unknownError } from "./features/errors";
 
 import { getConnInfo } from "hono/vercel"; // 本番
 
@@ -13,10 +14,12 @@ const app = new Hono()
     return c.json(await getPostsByPage(page))
   })
   .post('/', async c => {
-    c.status(400)
-    return c.json({
-      message: '投稿APIは現在準備中です'
-    })
+    if (!!process.env.VERCEL_ENV) {
+      c.status(400)
+      return c.json({
+        message: 'Coming Soon...',
+      })
+    }
 
     const { remote: { address } } = !!process.env.VERCEL_ENV
       ? getConnInfo(c)
@@ -35,6 +38,7 @@ const app = new Hono()
         ipAddress: address ?? '' // マイグレートめんどいから空文字になった
       })
       return c.json({
+        status: 200,
         message: '正常に投稿が完了しました',
         post: posted
       })
@@ -42,36 +46,19 @@ const app = new Hono()
       // Error型以外
       if (!(error instanceof Error)) {
         console.error(error)
-        c.status(500)
-        return c.json({
-          message: '予期せぬエラーが発生しました'
-        })
+        c.status(unknownError.status)
+        return c.json(unknownError)
       }
 
-      // LimitOver: 投稿数の制限を超えた
-      if (error.message === 'LimitOver') {
-        c.status(400)
-        return c.json({
-          message: '過去24時間の投稿数の制限を超しました。投稿は一日に60回までです。',
-          ipAddress: address
-        })
+      const displayError = getPostError(error.message)
+      if (!displayError) {
+        // どれにも当てはまらない
+        console.error(error)
+        c.status(unknownError.status)
+        return c.json(unknownError)
       }
-
-      // FailedVerify: 署名の検証に失敗した
-      if (error.message === 'FailedVerify' || error.message === 'VerifyKeyIsNotFound') {
-        c.status(401)
-        return c.json({
-          // message: '署名の検証に失敗しました' // TODO 署名を実装したら修正
-          message: '署名機能は現在未実装です'
-        })
-      }
-
-      // どれにも当てはまらない
-      console.error(error)
-      c.status(500)
-      return c.json({
-        message: '予期せぬエラーが発生しました'
-      })
+      c.status(displayError.status)
+      return c.json(displayError)
     }
   })
 

@@ -5,10 +5,12 @@
 
 // 法の長さ2048 = 256バイトまでOK? = ひらがな44文字分
 
+export const MODULUS_LENGTH = 2048
+
 export async function generateEncryptKey() {
   const algorithm: RsaHashedKeyGenParams = {
     name: "RSA-OAEP",
-    modulusLength: 2048,
+    modulusLength: MODULUS_LENGTH,
     publicExponent: new Uint8Array([1, 0, 1]),
     hash: { name: "SHA-1" }
   }
@@ -23,7 +25,7 @@ export async function generateEncryptKey() {
 export async function generateSignKey() {
   const algorithm: RsaHashedKeyGenParams = {
     name: "RSA-PSS",
-    modulusLength: 2048,
+    modulusLength: MODULUS_LENGTH,
     publicExponent: new Uint8Array([1, 0, 1]),
     hash: { name: "SHA-1" }
   }
