@@ -1,9 +1,11 @@
-import { verify } from "@/lib/sign";
 import { countPostFromIp, createPost as addPostToDB } from "../database";
-import { CreatePostRequired } from "../types";
-import { PostData, PostRequestSign } from "@/types";
+import { verify } from "@/lib/sign";
+import { encrypt } from "@/lib/encrypt";
 import { importPublicKey } from "@/lib/import-export-key";
 import { MODULUS_LENGTH } from "@/lib/generate-key";
+import { calcDigest } from "@/lib/digest";
+import type { PostData, PostRequestSign } from "@/types";
+import type { CreatePostRequired } from "../types";
 
 export async function createPost(post: CreatePostRequired): Promise<PostData> {
   if (post.sign.has) {
@@ -19,15 +21,7 @@ export async function createPost(post: CreatePostRequired): Promise<PostData> {
   }
 
   // 暗号化
-  const publixKey = await importPublicKey(post.publicKey, false)
-  if (
-    publixKey.algorithm.name !== 'RSA-OAEP' ||
-    (publixKey.algorithm as RsaKeyAlgorithm).modulusLength !== MODULUS_LENGTH
-  ) {
-    throw new Error('InvalidKey')
-  }
-  const cipher = post.plainText
-  const publicKeyDigest = post.publicKey // ハッシュを計算
+  const { cipher, publicKeyDigest } = await calcCipherAndDigest(post.plainText, post.publicKey)
 
   const result = await addPostToDB({
     body: cipher,
@@ -74,4 +68,27 @@ async function verifySign(plainText: string, sign: Exclude<PostRequestSign, { ha
 
   const ok = await verify(plainText, sign.signature, verifyKey)
   return ok
+}
+
+async function calcCipherAndDigest(plainText: string, publicKeyStr: string) {
+  try {
+    const publixKey = await importPublicKey(publicKeyStr, false)
+    if (
+      publixKey.algorithm.name !== 'RSA-OAEP' ||
+      (publixKey.algorithm as RsaKeyAlgorithm)?.modulusLength !== MODULUS_LENGTH
+    ) {
+      throw new Error('InvalidKey')
+    }
+
+    const cipher = await encrypt(plainText, publixKey)
+    const publicKeyDigest = await calcDigest(publicKeyStr)
+  
+    return {
+      cipher,
+      publicKeyDigest
+    }
+  } catch (error) {
+    // エラーは全てInvalidKeyということにしとく
+    throw new Error('InvalidKey')
+  }
 }
