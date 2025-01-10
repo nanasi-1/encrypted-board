@@ -2,6 +2,8 @@ import { verify } from "@/lib/sign";
 import { countPostFromIp, createPost as addPostToDB } from "../database";
 import { CreatePostRequired } from "../types";
 import { PostData, PostRequestSign } from "@/types";
+import { importPublicKey } from "@/lib/import-export-key";
+import { MODULUS_LENGTH } from "@/lib/generate-key";
 
 export async function createPost(post: CreatePostRequired): Promise<PostData> {
   if (post.sign.has) {
@@ -17,8 +19,11 @@ export async function createPost(post: CreatePostRequired): Promise<PostData> {
   }
 
   // 暗号化
-  // TODO publicKeyの長さをチェック
-  if (false) {
+  const publixKey = await importPublicKey(post.publicKey, false)
+  if (
+    publixKey.algorithm.name !== 'RSA-OAEP' ||
+    (publixKey.algorithm as RsaKeyAlgorithm).modulusLength !== MODULUS_LENGTH
+  ) {
     throw new Error('InvalidKey')
   }
   const cipher = post.plainText
