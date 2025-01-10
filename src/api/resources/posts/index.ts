@@ -14,6 +14,13 @@ const app = new Hono()
     return c.json(await getPostsByPage(page))
   })
   .post('/', async c => {
+    if (!!process.env.VERCEL_ENV) {
+      c.status(400)
+      return c.json({
+        message: 'Coming Soon...',
+      })
+    }
+
     const { remote: { address } } = !!process.env.VERCEL_ENV
       ? getConnInfo(c)
       // 普通にインポートするとビルドエラーになるので対策
