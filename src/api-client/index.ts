@@ -3,8 +3,8 @@ import { PostData, PostRequestBody, PostsAPIResponse } from "@/types";
 import { hc } from "hono/client";
 
 const client = hc<AppType>(
-  process.env['API_ENDPOINT'] ?? 'http://localhost:3000'
-).api
+  process.env['API_ENDPOINT'] ?? 'http://localhost:3000/api'
+)
 
 /**
  * 暗号一覧を取得する
