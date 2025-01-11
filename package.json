@@ -9,8 +9,9 @@
     "start": "next start",
     "type-check": "tsc --noEmit",
     "postinstall": "prisma generate",
-    "dev-db:run": "bash docker/db/start-db.sh && prisma db push",
-    "dev-db:build": "docker image build -t encrypted-postgres -f docker/db/db.Dockerfile ."
+    "dev-db:run": "bash docker/db/start-db.sh",
+    "dev-db:build": "docker image build -t encrypted-postgres -f docker/db/db.Dockerfile .",
+    "dev-db:setup": "prisma db push && bun src/api/lib/seed.ts"
   },
   "dependencies": {
     "@prisma/client": "^6.1.0",

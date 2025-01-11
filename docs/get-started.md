@@ -59,14 +59,10 @@ bun run dev-db:build
 
 次に、コンテナを立ち上げます。
 ローカル環境ではこのコンテナがデータベースサーバーとなります。
+同時にシードやPrismaクライアントのセットアップも行います。
 ```sh
 bun run dev-db:run
-```
-
-もし`prisma generate`でエラーが発生した場合、このコマンドのみ手動で実行し直してください。
-
-```sh
-bunx prisma generate
+bun run dev-db:setup
 ```
 
 ### 開発サーバーを立ち上げ
