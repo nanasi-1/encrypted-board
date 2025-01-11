@@ -6,6 +6,8 @@ const client = hc<AppType>(
   process.env['API_ENDPOINT'] ?? 'http://localhost:3000/api'
 )
 
+console.log(process.env.API_ENDPOINT)
+
 /**
  * 暗号一覧を取得する
  * @example
@@ -14,7 +16,10 @@ const client = hc<AppType>(
  */
 export async function getAllPosts(page: number = 1) {
   const response = await client.posts.$get({ query: { page } })
-  const result: PostsAPIResponse = await response.json() // きっとJSON形式なはず...
+  // const result: PostsAPIResponse = await response.json() // きっとJSON形式なはず...
+  const text = await response.text()
+  console.log(text)
+  const result: PostsAPIResponse = JSON.parse(text)
   return { response, result }
 }
 
