@@ -7,6 +7,7 @@ import PostModal from "./post-modal"
 import { calcPrivateDigest } from "@/lib/digest"
 import { sign as createSign } from "@/lib/sign"
 import { importSignKey } from "@/lib/import-export-key"
+import { createPost } from "@/api-client"
 
 export default function PostButton() {
   const { open: openModal, close } = useModal()
@@ -28,8 +29,7 @@ export default function PostButton() {
       sign
     }
 
-    console.log(post)
-    await new Promise(resolve => setTimeout(resolve, 4000))
+    await createPost(post)
     close()
   }
 
