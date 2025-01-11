@@ -22,6 +22,7 @@ export async function getAllPosts(args: Prisma.PostFindManyArgs): Promise<PostDa
       created_at: true,
       ip_address: false,
     },
+    orderBy: { id: 'desc' },
     ...args
   })
 

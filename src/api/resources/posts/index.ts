@@ -1,5 +1,3 @@
-// // @ts-nocheck ビルドエラー回避、後で消す
-
 import { Hono } from "hono";
 import { getPostsByPage } from "./features/get-all";
 import { parsePostBody, parsePostQuery } from "./scheme";
@@ -14,17 +12,12 @@ const app = new Hono()
     return c.json(await getPostsByPage(page))
   })
   .post('/', async c => {
-    if (!!process.env.VERCEL_ENV) {
-      c.status(400)
-      return c.json({
-        message: 'Coming Soon...',
-      })
-    }
-
     const { remote: { address } } = !!process.env.VERCEL_ENV
       ? getConnInfo(c)
-      // 普通にインポートするとビルドエラーになるので対策
-      : (await import('hono/bun')).getConnInfo(c)
+      : process.env['RUNTIME'] === 'Next.js'
+        ? { remote: { address: 'DEFAULT_IP' } }
+        // 普通にインポートするとビルドエラーになるので対策
+        : (await import('hono/bun')).getConnInfo(c)
 
     const parseResult = parsePostBody(await c.req.text())
     if (!parseResult.success) {
@@ -35,7 +28,7 @@ const app = new Hono()
     try {
       const posted = await createPost({
         ...parseResult.data,
-        ipAddress: address ?? '' // マイグレートめんどいから空文字になった
+        ipAddress: address ?? 'DEFAULT_IP'
       })
       return c.json({
         status: 200,

@@ -8,5 +8,5 @@ const app = new Hono({
   .use(logger())
   .route('/', routes)
 
-export type AppType = typeof app
+export type AppType = typeof routes
 export default app
