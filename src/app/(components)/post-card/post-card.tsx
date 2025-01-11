@@ -4,13 +4,20 @@ import { Icones, LockIcon, MentionIcon } from '@/components/ui/icons'
 import Menus from './menus'
 import { PostData } from '@/types'
 
+function formatCreateAt(iso: string) {
+  // 手抜き工事だけど動けばいいんだよ動けば
+  // しっかりやるならライブラリを導入しよう
+  const date = new Date(iso)
+  return `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`
+}
+
 /** 各投稿のコンポーネント  */
 // `Post`だと投稿を意味する`post`と名前が被るので`PostCard`とした
 export default function PostCard({ post }: { post: PostData }) {
   return (
     <div className={styles['wrapper']}>
       <div className={styles['top-line']}>
-        <span className={styles['date']}>{post.createdAt}</span>
+        <span className={styles['date']}>{formatCreateAt(post.createdAt)}</span>
         <span className={styles['public-key']}>
           <Icones Icon={LockIcon} position="left-of-text" />
           <Cipher color='white'>{post.publicKeyDigest}</Cipher>
