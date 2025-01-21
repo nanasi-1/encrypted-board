@@ -40,7 +40,7 @@ const app = new Hono()
         status: 200,
         message: '正常に投稿が完了しました',
         post: posted
-      })
+      } as const)
     } catch (error) {
       // Error型以外
       if (!(error instanceof Error)) {
