@@ -30,7 +30,7 @@ export async function getAllPosts(page: number = 1) {
     return unknownErrorDummy
   }
 
-  const result = await response.json()
+  const result: PostsAPIResponse | CustomError = await response.json()
   return { response, result }
 }
 
