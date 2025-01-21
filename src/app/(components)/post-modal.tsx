@@ -64,6 +64,7 @@ export default function PostModal({ onSubmit }: {
             required
             placeholder="投稿したいメッセージを入力..."
             className={error ? 'border-red-500' : ''}
+            autoFocus
           />
           {error && <ValidationError>{error}</ValidationError>}
         </FormSection>

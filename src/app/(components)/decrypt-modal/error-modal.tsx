@@ -44,7 +44,7 @@ function ErrorModal({ children, title, message }: {
         <p>{message}</p>
       </div>
       {children}
-      <SubmitButton type="button" onClick={close} className={customStyles['submit-button']}>OK</SubmitButton>
+      <SubmitButton type="button" onClick={close} className={customStyles['submit-button']} autoFocus>OK</SubmitButton>
     </div>
   )
 }
