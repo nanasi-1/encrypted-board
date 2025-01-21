@@ -3,7 +3,6 @@
 import { FormInput, FormLabel, FormSection, FormTextarea, OptionText, SubmitButton, ValidationError } from "@/components/ui/form";
 import { ModalTitle } from "@/components/ui/modal/ModalUI";
 import { PostFormData } from "@/types";
-import { useRouter } from "next/navigation";
 import { FormEventHandler, useState } from "react";
 
 function validatePlainText(text: string) {
@@ -28,7 +27,6 @@ export default function PostModal({ onSubmit }: {
   const [error, setError] = useState<React.ReactNode | null>(null)
   const [value, setValue] = useState('')
   const [nowPosted, setNowPosted] = useState(false)
-  const router = useRouter()
 
   const handleChange: React.ChangeEventHandler<HTMLTextAreaElement> = (event) => {
     setValue(event.target.value)
@@ -47,7 +45,6 @@ export default function PostModal({ onSubmit }: {
     await onSubmit(post)
     setNowPosted(false)
     setValue('') // 平文のみリセット
-    router.refresh()
   }
 
   return (
