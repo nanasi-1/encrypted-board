@@ -1,5 +1,5 @@
 import { AppType } from "@/api";
-import { CustomError, unknownError } from "@/api/resources/posts/features/errors";
+import { CustomError, unknownError } from "@/api/lib/errors";
 import { PostData, PostRequestBody, PostsAPIResponse } from "@/types";
 import { hc } from "hono/client";
 

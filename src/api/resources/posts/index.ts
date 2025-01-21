@@ -2,7 +2,8 @@ import { Hono } from "hono";
 import { getPostsByPage } from "./features/get-all";
 import { parsePostBody, parsePostQuery } from "./scheme";
 import { createPost } from "./features/create";
-import { getPostError, unknownError } from "./features/errors";
+import { getPostError } from "./features/errors";
+import { unknownError } from "@/api/lib/errors";
 
 import { getConnInfo } from "hono/vercel"; // 本番
 
