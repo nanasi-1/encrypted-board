@@ -10,7 +10,6 @@ export async function getPostsByPage(page: number): Promise<PostsAPIResponse> {
     take: ONE_PAGE_POSTS,
   })
 
-  // テストしてない
   const hasNext = posts.length >= ONE_PAGE_POSTS
     ? await countAllPost() >= page
     : false

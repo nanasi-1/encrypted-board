@@ -9,7 +9,13 @@ import { getConnInfo } from "hono/vercel"; // 本番
 const app = new Hono()
   .get('/', async c => {
     const { page } = parsePostQuery(c.req.query())
-    return c.json(await getPostsByPage(page))
+    try {
+      return c.json(await getPostsByPage(page))
+    } catch (error) {
+      console.error(error instanceof Error ? error.stack : error )
+      c.status(unknownError.status)
+      return c.json(unknownError)
+    }
   })
   .post('/', async c => {
     const { remote: { address } } = !!process.env.VERCEL_ENV
