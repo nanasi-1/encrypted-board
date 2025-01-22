@@ -2,14 +2,21 @@ import { Hono } from "hono";
 import { getPostsByPage } from "./features/get-all";
 import { parsePostBody, parsePostQuery } from "./scheme";
 import { createPost } from "./features/create";
-import { getPostError, unknownError } from "./features/errors";
+import { getPostError } from "./features/errors";
+import { unknownError } from "@/api/lib/errors";
 
 import { getConnInfo } from "hono/vercel"; // 本番
 
 const app = new Hono()
   .get('/', async c => {
     const { page } = parsePostQuery(c.req.query())
-    return c.json(await getPostsByPage(page))
+    try {
+      return c.json(await getPostsByPage(page))
+    } catch (error) {
+      console.error(error instanceof Error ? error.stack : error )
+      c.status(unknownError.status)
+      return c.json(unknownError)
+    }
   })
   .post('/', async c => {
     const { remote: { address } } = !!process.env.VERCEL_ENV
@@ -34,7 +41,7 @@ const app = new Hono()
         status: 200,
         message: '正常に投稿が完了しました',
         post: posted
-      })
+      } as const)
     } catch (error) {
       // Error型以外
       if (!(error instanceof Error)) {

@@ -18,3 +18,7 @@ dialog::backdrop {
 input, textarea {
   @apply bg-black;
 }
+
+*:focus {
+  @apply outline-none;
+}

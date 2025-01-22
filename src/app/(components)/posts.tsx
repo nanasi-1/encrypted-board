@@ -5,23 +5,23 @@ import { getAllPosts } from "@/api-client";
 export default async function Posts({ currentPage }: {
   currentPage: number
 }) {
-  const { 
-    response, 
-    result: { posts, hasNext } 
-  } = await getAllPosts(currentPage)
+  const { response, result } = await getAllPosts(currentPage)
 
-  if (!response.ok) {
+  if (!response.ok || ('status' in result)) { // resultはCustomError or 通常のレスポンス
     return (
-      <div>ERROR: 投稿が取得できませんでした</div>
+      <div className="text-center bg-black py-10">
+        <h3 className="font-bold text-xl text-red-500">ERROR: 投稿が取得できませんでした</h3>
+        {'status' in result ? <p className="mt-5">{result.message}</p> : null }
+      </div>
     )
   }
 
   return (
     <div className="flex items-center flex-col gap-y-7">
-      {posts.map(post => (
+      {result.posts.map(post => (
         <PostCard key={post.id} post={post} />
       ))}
-      <Pagination currentPage={currentPage} hasNext={hasNext} baseHref="/?page=" />
+      <Pagination currentPage={currentPage} hasNext={result.hasNext} baseHref="/?page=" />
     </div>
   )
 }

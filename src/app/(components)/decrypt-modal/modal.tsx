@@ -27,6 +27,7 @@ export default function DecryptModal({ onSubmit }: {
             id="decrypt-private-key"
             name="private-key"
             required
+            autoFocus
           />
         </FormSection>
         <SubmitButton disabled={pending}>
