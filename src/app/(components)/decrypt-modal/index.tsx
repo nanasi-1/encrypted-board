@@ -7,6 +7,7 @@ import { useModalContext } from "@/components/ui/modal/context";
 import { InvalidErrorModal, OperationErrorModal } from "./error-modal";
 import { PostData } from "@/types";
 import { ErrorModalWrapper } from "@/components/ui/modal/error-modal";
+import { calcPrivateDigest } from "@/lib/digest";
 
 export function useDecryptModal() {
   const { open } = useModal()
@@ -31,8 +32,8 @@ export function useDecryptModal() {
         return
       }
       if (error instanceof Error && error.name === 'OperationError') {
-        const privateKeyDigest = privateKey.slice(0, 20) // ダイジェストを計算
-        openError(<OperationErrorModal publicKey={post.publicKeyDigest} privateKey={privateKeyDigest} />)
+        const digest = await calcPrivateDigest(privateKey)
+        openError(<OperationErrorModal publicKey={post.publicKeyDigest} privateKey={digest} />)
         return
       }
       throw error // 予期せぬエラー
