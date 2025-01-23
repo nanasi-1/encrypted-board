@@ -4,8 +4,9 @@ import { ResultModal } from "./result-modal";
 import { decrypt } from "@/lib/encrypt";
 import { importPrivateKey } from "@/lib/import-export-key";
 import { useModalContext } from "@/components/ui/modal/context";
-import { ErrorModalWrapper, InvalidErrorModal, OperationErrorModal } from "./error-modal";
+import { InvalidErrorModal, OperationErrorModal } from "./error-modal";
 import { PostData } from "@/types";
+import { ErrorModalWrapper } from "@/components/ui/modal/error-modal";
 
 export function useDecryptModal() {
   const { open } = useModal()
