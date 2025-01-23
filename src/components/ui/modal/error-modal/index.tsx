@@ -25,20 +25,19 @@ export function ErrorModalWrapper({ children }: {
   )
 }
 
-export function ErrorModal({ children, title, message }: {
-  children?: React.ReactNode,
+export function ErrorModal({ children, title, label, message }: {
+  children?: React.ReactNode
   title: React.ReactNode
+  label: React.ReactNode
   message: React.ReactNode
 }) {
   const { close } = useModal()
 
   return (
     <div>
-      <ModalTitle className="text-red-600">
-        DECRYPTION ERROR!
-      </ModalTitle>
+      <ModalTitle className="text-red-600">{title}</ModalTitle>
       <div className="mb-5">
-        <h3 className="font-bold mb-1">[ {title} ]</h3>
+        <h3 className="font-bold mb-1">[ {label} ]</h3>
         <p>{message}</p>
       </div>
       {children}

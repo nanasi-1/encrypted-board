@@ -7,10 +7,11 @@ import { ErrorModal } from "@/components/ui/modal/error-modal"
 export function InvalidErrorModal({ privateKey }: { privateKey: string }) {
   return (
     <ErrorModal 
-      title="解析に失敗しました" 
-      message="解読不可能な秘密鍵を受信しました。Base64の鍵が必要です。"
+      title="DECRYPTION ERROR!"
+      label="解析に失敗しました" 
+      message="解読不可能な秘密鍵を受信しました。Base64の鍵が必要です。" // TODO メッセージを考え直す
     >
-      <h3 className="font-bold mb-3">秘密鍵</h3>
+      <h3 className="font-bold mb-3">入力された秘密鍵</h3>
       <div className="border-red-600 border h-24 px-3 py-2 break-words overflow-y-scroll">
         <Cipher className="text-white">{privateKey}</Cipher>
       </div>
@@ -25,7 +26,8 @@ export function OperationErrorModal({ publicKey, privateKey }: {
 }) {
   return (
     <ErrorModal 
-      title="アクセスが拒否されました" 
+      title="DECRYPTION ERROR!"
+      label="アクセスが拒否されました" 
       message="使用された秘密鍵と暗号化に用いられた公開鍵が一致しません。"
     >
       <div className="border px-3 py-2 border-primary mb-4">
