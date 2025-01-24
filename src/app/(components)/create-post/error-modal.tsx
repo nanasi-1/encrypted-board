@@ -7,19 +7,20 @@ import { ErrorModal } from "@/components/ui/modal/error-modal"
 export function openErrorWithCode(error: CustomError, openModal: (c: React.ReactNode) => void) {
   const code = error.code
   if (code === 'LimitOver') {
-    openModal('limit')
+    openModal(<LimitOver message={error.message} />)
     return
   }
   if (code === 'VerifyFailed') {
-    openModal('verify')
+    openModal(<FailedVerify message={error.message} />)
     return
   }
   if (code === 'VerifyKeyIsNotFound') {
-    openModal('notfound')
+    // 面倒だった
+    openModal(<InvalidKey message={error.message} />)
     return
   }
   if (code === 'InvalidKey') {
-    openModal('Base64なのに...')
+    openModal(<InvalidKey message={error.message} />)
     return
   }
   if (code === 'UnknownError') {
@@ -29,6 +30,19 @@ export function openErrorWithCode(error: CustomError, openModal: (c: React.React
 
   // それ以外はすべてUnknownErrorとして扱う
   openModal(<UnknownError>{error.message}</UnknownError>)
+}
+
+// エラーの「詳細」の表示
+function Details({ title, children }: { 
+  title?: React.ReactNode,
+  children: React.ReactNode 
+}) {
+  return (
+    <div>
+      <h3 className="font-bold mb-3">{title ?? "詳細"}</h3>
+      <div className="border-red-600 border px-3 py-2">{children}</div>
+    </div>
+  )
 }
 
 export function ValidationError() {
@@ -44,10 +58,7 @@ export function UnknownError({ children }: { children: React.ReactNode }) {
       label="不明なエラー"
       message="予期せぬエラーが発生しました。"
     >
-      <div>
-        <h3 className="font-bold mb-3">詳細</h3>
-        <div className="border-red-600 border px-3 py-2">{children}</div>
-      </div>
+      <Details>{children}</Details>
       <hr className="border-red-600 mt-6 mb-4" />
       <p>
         未解決のエラーが発生しました。<br />
@@ -56,5 +67,35 @@ export function UnknownError({ children }: { children: React.ReactNode }) {
         での貢献をご検討ください。<br />
       </p>
     </ErrorModal>
+  )
+}
+
+function LimitOver({ message }: { message: React.ReactNode }) {
+  return (
+    <ErrorModal
+      title="OVER LIMIT!"
+      label="制限を超過しました"
+      message={message}
+    ></ErrorModal>
+  )
+}
+
+function FailedVerify({ message }: { message: React.ReactNode }) {
+  return (
+    <ErrorModal
+      title="FAILED VERIFY!"
+      label="アクセスが拒否されました"
+      message={message}
+    ></ErrorModal>
+  )
+}
+
+function InvalidKey({ message }: { message: React.ReactNode }) {
+  return (
+    <ErrorModal
+      title="ENCRYPTION ERROR!"
+      label="鍵が不正です"
+      message={message}
+    ></ErrorModal>
   )
 }
