@@ -9,7 +9,9 @@ import { sign as createSign } from "@/lib/sign"
 import { importSignKey } from "@/lib/import-export-key"
 import { createPost } from "@/api-client"
 import { useRouter } from "next/navigation";
-import { unknownError } from "@/api/lib/errors"
+import type { CustomError } from "@/api/lib/errors"
+import { useErrorModal } from "@/components/ui/modal/error-modal/hooks"
+import { openErrorWithCode, ValidationError } from "./error-modal"
 
 async function createPostBody(form: PostFormData) {
   try {
@@ -28,19 +30,24 @@ async function createPostBody(form: PostFormData) {
     }
     return post
   } catch (error) {
-    return unknownError
+    return {
+      code: 'InvalidKey',
+      status: 400,
+      message: '署名鍵の解析に失敗しました。'
+    } as const satisfies CustomError
   }
 }
 
 export default function PostButton() {
   const router = useRouter()
   const { open: openModal, close } = useModal()
+  const { openErrorModal } = useErrorModal()
 
   // TODO エラーハンドリング作る
   const handleSubmitForm = async (form: PostFormData) => {
     const post = await createPostBody(form)
-    if ('code' in post && post.code === 'UnknownError') {
-      openModal('Unknown Error Modal')
+    if ('code' in post) {
+      openErrorWithCode(post, openErrorModal)
       return
     }
 
@@ -50,33 +57,13 @@ export default function PostButton() {
       close()
       return
     }
-    
+
     // バリデーションエラー
     if ('issues' in result) {
-      openModal('入力された値が無効です')
+      openErrorModal(<ValidationError />)
       return
     }
-
-    if (result.code === 'LimitOver') {
-      openModal('limit')
-      return
-    }
-    if (result.code === 'VerifyFailed') {
-      openModal('verify')
-      return
-    }
-    if (result.code === 'VerifyKeyIsNotFound') {
-      openModal('notfound')
-      return
-    }
-    if (result.code === 'InvalidKey') {
-      openModal('Base64なのに...')
-      return
-    }
-    if (result.code === 'UnknownError') {
-      openModal('unknown')
-      return
-    }
+    openErrorWithCode(result, openErrorModal)
   }
 
   return (

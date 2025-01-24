@@ -36,7 +36,7 @@ export function ErrorModal({ children, title, label, message }: {
   return (
     <div>
       <ModalTitle className="text-red-600">{title}</ModalTitle>
-      <div className="mb-5">
+      <div className={children ? "mb-5" : void 0}>
         <h3 className="font-bold mb-1">[ {label} ]</h3>
         <p>{message}</p>
       </div>
