@@ -22,6 +22,12 @@ async function generate() {
   return keyStr
 }
 
+export interface KeyDetails {
+  readonly publicKey: string,
+  readonly privateKey: string,
+  readonly digest: string
+}
+
 export const DEFAULT_KEYS: readonly {
   readonly publicKey: string,
   readonly privateKey: string,
