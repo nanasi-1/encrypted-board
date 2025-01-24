@@ -15,6 +15,10 @@ dialog::backdrop {
   @apply bg-black/30;
 }
 
+body:has(dialog[open]) {
+  overflow: hidden;
+}
+
 input, textarea {
   @apply bg-black;
 }
