@@ -3,18 +3,14 @@ import DecryptModal from "./modal";
 import { ResultModal } from "./result-modal";
 import { decrypt } from "@/lib/encrypt";
 import { importPrivateKey } from "@/lib/import-export-key";
-import { useModalContext } from "@/components/ui/modal/context";
-import { ErrorModalWrapper, InvalidErrorModal, OperationErrorModal } from "./error-modal";
+import { InvalidErrorModal, OperationErrorModal } from "./error-modal";
 import { PostData } from "@/types";
+import { calcPrivateDigest } from "@/lib/digest";
+import { useErrorModal } from "@/components/ui/modal/error-modal/hooks";
 
 export function useDecryptModal() {
   const { open } = useModal()
-  const { setModalComponent, dialogRef } = useModalContext()
-
-  const openError = (children: React.ReactNode) => {
-    setModalComponent(<ErrorModalWrapper>{children}</ErrorModalWrapper>)
-    dialogRef.current?.showModal()
-  }
+  const { openErrorModal: openError } = useErrorModal()
 
   const openResult = async (post: PostData, privateKey: string) => {
     try {
@@ -30,8 +26,8 @@ export function useDecryptModal() {
         return
       }
       if (error instanceof Error && error.name === 'OperationError') {
-        const privateKeyDigest = privateKey.slice(0, 20) // ダイジェストを計算
-        openError(<OperationErrorModal publicKey={post.publicKeyDigest} privateKey={privateKeyDigest} />)
+        const digest = await calcPrivateDigest(privateKey)
+        openError(<OperationErrorModal publicKey={post.publicKeyDigest} privateKey={digest} />)
         return
       }
       throw error // 予期せぬエラー

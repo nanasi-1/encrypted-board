@@ -8,12 +8,12 @@ const postErrors: readonly CustomErrorInit[] = [
   {
     names: ['FailedVerify', 'VerifyKeyIsNotFound'],
     status: 401,
-    message: '署名機能は現在未実装です'
+    message: '署名機能は現在未実装です。'
   },
   {
     names: ['InvalidKey'],
     status: 400,
-    message: '鍵が不正です'
+    message: '鍵の解析に失敗しました。'
   }
 ]
 
