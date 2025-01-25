@@ -21,16 +21,14 @@ export function CipherBox({ children, className, cipherColor, boxColor }: {
   )
 }
 
-export function TextBox({ children, color, breakText, className }: {
+export function TextBox({ children, color, className }: {
   children?: React.ReactNode,
   color?: string
-  breakText?: boolean
   className?: string
 }) {
   const _classname = classnameBuilder()
     .addByArray(['border', 'px-3', 'py-2'] as const)
     .add(`border-${color ?? 'primary'}`)
-    .add(breakText ? null : 'break-words overflow-x-scroll')
     .add(className)
     .build()
 
