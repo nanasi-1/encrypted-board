@@ -1,25 +1,8 @@
 import Cipher from "@/components/ui/cipher";
 import { Icones, KeyIcon } from "@/components/ui/icons";
 import { ModalTitle } from "@/components/ui/modal/ModalUI";
-import { TextBox } from "@/components/ui/text-box";
 import { DEFAULT_KEYS, KeyDetails } from "@/lib/default-keys/encrypt";
-import styles from './index.module.css'
-
-function KeyBox({ label, children, className }: {
-  children: React.ReactNode
-  className?: string
-  label: React.ReactNode
-}) {
-  return (
-    <TextBox className={`${styles['key-box']} ${className}`}>
-      <span className="my-2 font-bold block border-r border-primary">{label}</span>
-      <div className="my-2 max-h-[1.4rem] overflow-y-scroll">
-        <Cipher color="white">{children}</Cipher>
-      </div>
-      <button className="bg-primary text-black font-bold">コ</button>
-    </TextBox>
-  )
-}
+import KeyBox from "./key-box";
 
 function DefaultKey({ publicKey, privateKey, digest }: KeyDetails) {
   return (
