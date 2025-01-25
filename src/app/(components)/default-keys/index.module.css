@@ -1,0 +1,7 @@
+.key-box {
+  display: grid;
+  grid-template-columns: 1.5fr 8fr 1fr;
+  column-gap: 15px;
+  padding-block: 0;
+  padding-right: 0;
+}

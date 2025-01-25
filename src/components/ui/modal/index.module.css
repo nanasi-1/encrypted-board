@@ -10,7 +10,7 @@
   /* 余白 */
   @apply px-8 py-8;
   /* その他 */
-  @apply relative max-h-screen overflow-scroll;
+  @apply relative max-h-[85%] overflow-scroll;
 }
 
 .close-button {

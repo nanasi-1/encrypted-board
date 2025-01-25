@@ -7,6 +7,7 @@ import { InvalidErrorModal, OperationErrorModal } from "./error-modal";
 import { PostData } from "@/types";
 import { calcPrivateDigest } from "@/lib/digest";
 import { useErrorModal } from "@/components/ui/modal/error-modal/hooks";
+import { UnknownError } from "@/components/ui/modal/components";
 
 export function useDecryptModal() {
   const { open } = useModal()
@@ -30,7 +31,9 @@ export function useDecryptModal() {
         openError(<OperationErrorModal publicKey={post.publicKeyDigest} privateKey={digest} />)
         return
       }
-      throw error // 予期せぬエラー
+      openError(
+        <UnknownError>{error instanceof Error ? error.message : '予期せぬエラーが発生しました'}</UnknownError>
+      )
     }
   }
 
