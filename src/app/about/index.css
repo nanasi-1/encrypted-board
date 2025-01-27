@@ -1,7 +1,11 @@
 .about {
-  line-height: 1.7;
+  line-height: 1.8;
 
   p:not([class^="mb-"], [class^="my-"], [class^="m-"]) {
-    margin-bottom: 8px;
+    margin-bottom: 12px;
+  }
+
+  a:not([class]) {
+    @apply text-secondary-400;
   }
 }
