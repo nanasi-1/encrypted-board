@@ -26,7 +26,9 @@ export function Section({ children, className, title, id }: UIProps & {
   return (
     <section id={id} className={`mb-10 ${className ?? ''}`}>
       <Header2 className="mb-5">{title}</Header2>
-      {children}
+      <div className="px-3 relative">
+        {children}
+      </div>
     </section>
   )
 }
