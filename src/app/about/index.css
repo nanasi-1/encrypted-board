@@ -1,7 +1,7 @@
 .about {
   line-height: 1.7;
 
-  p {
-    @apply mb-2;
+  p:not([class^="mb-"], [class^="my-"], [class^="m-"]) {
+    margin-bottom: 8px;
   }
 }

@@ -14,7 +14,12 @@ export default function AboutEncryptedBoard() {
   return (
     <section>
       <Header2>暗号掲示板とは</Header2>
-      <p><strong>暗号しか投稿できない掲示板</strong>です。</p>
+      <p>
+        <strong>暗号しか投稿できない匿名掲示板</strong>です。
+      </p>
+      <p className="mb-5">
+        暗号とは、
+      </p>
       <PostCard post={dummyPost} />
     </section>
   )
