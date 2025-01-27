@@ -12,18 +12,29 @@ const dummyPost: PostData = {
 
 export default function AboutEncryptedBoard() {
   return (
-    <section>
+    <section id="about-encrypted-board">
       <Header2>暗号掲示板とは</Header2>
       <p>
-        <strong>暗号しか投稿できない匿名掲示板</strong>です。
+        <strong>
+          <a href="#about-crypto" className="text-primary">暗号</a>
+          しか投稿できない匿名掲示板</strong>です。
+      </p>
+      <p>
+        当掲示板には、暗号化によって秘匿された<strong>暗号文</strong>が投稿されています。<br />
+        各投稿は正しく<strong>復号</strong>することで読むことができます。<br />
+        暗号には公開鍵暗号方式を採用しているため、秘密鍵を知らない場合復号することは不可能です。<br />
       </p>
       <p className="mb-5">
-        当掲示板には、暗号化によって秘匿された<strong>暗号文</strong>が投稿されています。<br />
-        各投稿は正しく復号することで文章として読むことができます。<br />
+        また、自分で暗号文を投稿することも可能です。<br />
+        投稿の平文は自由な文章を入力でき、暗号化されて保存されます。<br />
       </p>
-      <div className="leading-6 w-5/6">
+      <div className="leading-6 w-11/12 mb-5">
         <PostCard post={dummyPost} />
       </div>
+      <p>
+        投稿には公開鍵暗号の<strong>鍵</strong>が必要です。<br />
+        当掲示板ではあらかじめ<a href="#default-key">デフォルト鍵</a>を用意していますので、ぜひご利用下さい。<br />
+      </p>
     </section>
   )
 }
