@@ -1,5 +1,5 @@
 import PostCard from "@/app/(components)/post-card/post-card";
-import { Header2 } from "../ui";
+import { Section } from "../ui";
 import { PostData } from "@/types";
 
 const dummyPost: PostData = {
@@ -12,8 +12,7 @@ const dummyPost: PostData = {
 
 export default function AboutEncryptedBoard() {
   return (
-    <section id="about-encrypted-board">
-      <Header2>暗号掲示板とは</Header2>
+    <Section id="about-encrypted-board" title="暗号掲示板とは">
       <p>
         <strong>
           <a href="#about-crypto" className="text-primary">暗号</a>
@@ -35,6 +34,6 @@ export default function AboutEncryptedBoard() {
         投稿には公開鍵暗号の<strong>鍵</strong>が必要です。<br />
         当掲示板ではあらかじめ<a href="#default-key">デフォルト鍵</a>を用意していますので、ぜひご利用下さい。<br />
       </p>
-    </section>
+    </Section>
   )
 }
