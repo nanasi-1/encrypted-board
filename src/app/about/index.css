@@ -11,6 +11,6 @@
 
   ul:not([class]) {
     list-style: disc;
-    @apply ml-5;
+    @apply ml-5 mb-3;
   }
 }
