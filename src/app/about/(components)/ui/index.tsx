@@ -67,3 +67,11 @@ export function Section2({ children, className, title, id }: SectionProps) {
     </section>
   )
 }
+
+export function EffectWrapper({ children, className }: UIProps) {
+  return (
+    <div className={`absolute top-0 right-0 select-none opacity-40 -z-10 ${className}`}>
+      {children}
+    </div>
+  )
+}
