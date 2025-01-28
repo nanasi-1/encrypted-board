@@ -1,6 +1,8 @@
 import Cipher from "@/components/ui/cipher";
-import { ColorStrong, EffectWrapper, Section, Section2 } from "../ui";
+import { ColorStrong, EffectWrapper, Section, Section2 } from "../../ui";
 import { Icones, KeyIcon } from "@/components/ui/icons";
+import rsaDetails from './公開鍵暗号とは.svg'
+import Image from 'next/image'
 
 export default function AboutCrypto() {
   return (
@@ -48,22 +50,48 @@ export default function AboutCrypto() {
           暗号鍵を使った方式では、事前に作成された鍵を使って文書を暗号化します。<br />
           かつ<strong>暗号文の復号には鍵が必要</strong>になるので、鍵が漏洩しなければ安全ということになります。<br />
         </p>
+        <p>
+          ということで、最初に編み出されたのは<a href="https://ja.wikipedia.org/wiki/共通鍵暗号">共通鍵暗号</a>でした。<br />
+          これは今も使われているほど実用的な暗号ですが、暗号化と復号に同じ鍵を使用する方式なため、
+          鍵を送信する際に盗まれる可能性があるという問題があります。<br />
+          その問題は、別の暗号方式である<strong>公開鍵暗号</strong>の登場によって解決することとなりました。<br />
+        </p>
       </Section2>
       <Section2 title="公開鍵暗号">
-        <ul>
-          <li>秘密鍵と公開鍵の2つの鍵を使う</li>
-          <li>公開鍵: 暗号化に使う、公開しても問題ない</li>
-          <li>秘密鍵: 復号に使う、秘密にしておく必要がある</li>
-          <li><s>メッセージの送信元の確認はできないので、ちゃんとやるなら公開鍵認証などと併用する必要がある</s></li>
-          <li>ここに画像を載せたい</li>
+        <p>
+          <a href="https://ja.wikipedia.org/wiki/公開鍵暗号">公開鍵暗号</a>は暗号鍵を使った暗号方式の一つです。<br />
+          当掲示板ではこの公開鍵暗号のうち、<a href="https://ja.wikipedia.org/wiki/RSA暗号">RSA暗号</a>を使用しています。<br />
+          この方式では、<ColorStrong>公開鍵</ColorStrong>と<ColorStrong>秘密鍵</ColorStrong>の2つの鍵が使われます。<br />
+        </p>
+        <p>
+          公開鍵と秘密鍵にはそれぞれ別の責務があります。<br />
+          これらは通信を行う前に事前に生成され、2つの鍵のうち<strong>公開鍵は暗号の送信者に渡す</strong>必要があります。<br />
+          それぞれの鍵は以下のように使用されます。<br />
+        </p>
+        <ul className="list-none ml-2 mb-3">
+          <li>
+            <ColorStrong><Icones Icon={KeyIcon} position="left-of-text" />公開鍵: 暗号化</ColorStrong>
+            に使う、公開しても問題ない
+          </li>
+          <li>
+            <ColorStrong><Icones Icon={KeyIcon} position="left-of-text" />秘密鍵: 復号</ColorStrong>
+            に使う、秘密にしておく必要がある
+          </li>
         </ul>
-      </Section2>
-      <Section2 title="要約">
-        <ul>
-          <li>第三者が文を見ても特別な知識なしでは読めない秘匿された文</li>
-          <li>相手に暗号化ツールを知られても、鍵が知られなければ安全</li>
-          <li>最近はコンピューターでの暗号化が主流</li>
-        </ul>
+        <p>
+          図解にするとこのようになります。<br />
+        </p>
+        <div className="my-5 py-6 px-6 border-2 border-primary w-fit">
+          <Image src={rsaDetails} alt="公開鍵暗号とは" width={500} />
+        </div>
+        <p>
+          なお、ここまでで説明した公開鍵暗号や共通鍵暗号は、
+          <strong>コンピューターを使用して暗号化 / 復号する</strong>
+          ことが前提となっています。<br />
+          これは暗号が時代とともに強固になっていったため、
+          <strong>要求される計算量が非常に増大</strong>
+          し、手作業で処理することが現実的ではなくなったためです。<br />
+        </p>
       </Section2>
     </Section>
   )
