@@ -8,4 +8,9 @@
   a:not([class]) {
     @apply text-secondary-400;
   }
+
+  ul:not([class]) {
+    list-style: disc;
+    @apply ml-5;
+  }
 }

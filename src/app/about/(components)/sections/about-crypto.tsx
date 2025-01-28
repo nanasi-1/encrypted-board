@@ -25,13 +25,22 @@ export default function AboutCrypto() {
         </div>
       </Section2>
       <Section2 title="暗号においての鍵">
-        <p>執筆中...</p>
+        <ul>
+          <li>暗号化や復号に<strong>鍵</strong>が必要になる暗号方式</li>
+          <li>使うもの: 専用のアルゴリズム + 鍵</li>
+        </ul>
       </Section2>
       <Section2 title="公開鍵暗号">
-        <p>執筆中...</p>
+        <ul>
+          <li>秘密鍵と公開鍵の2つの鍵を使う</li>
+          <li>公開鍵: 暗号化に使う、公開しても問題ない</li>
+          <li>秘密鍵: 復号に使う、秘密にしておく必要がある</li>
+          <li><s>メッセージの送信元の確認はできないので、ちゃんとやるなら公開鍵認証などと併用する必要がある</s></li>
+          <li>ここに画像を載せたい</li>
+        </ul>
       </Section2>
       <Section2 title="要約">
-        <ul className="list-disc ml-5">
+        <ul>
           <li>第三者が文を見ても特別な知識なしでは読めない秘匿された文</li>
           <li>相手に暗号化ツールを知られても、鍵が知られなければ安全</li>
           <li>最近はコンピューターでの暗号化が主流</li>
