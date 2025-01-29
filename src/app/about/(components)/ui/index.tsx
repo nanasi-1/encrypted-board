@@ -1,3 +1,5 @@
+import { tv } from "tailwind-variants"
+
 type UIProps = {
   className?: string,
   children?: React.ReactNode
@@ -38,8 +40,9 @@ export function Header3({ children, className, id }: HeaderProps) {
 export function ColorStrong({ children, color, className }: UIProps & {
   color?: string
 }) {
+  const strong = tv({ base: `text-${color ?? 'primary'}` })
   return (
-    <strong className={`text-${color ?? 'primary'} ${className ?? ''}`}>{children}</strong>
+    <strong className={strong({ className })}>{children}</strong>
   )
 }
 
