@@ -1,6 +1,6 @@
-import { classnameBuilder } from "@/utils/classname-builder"
 import Link from "next/link"
 import styles from './pagination.module.css'
+import { tv } from "tailwind-variants"
 
 type NavProps = {
   children: React.ReactNode
@@ -14,16 +14,18 @@ type NavProps = {
 })
 
 function Nav({ children, href, current, disabled }: NavProps) {
-  const innerClassname = classnameBuilder()
-    .add(styles['inner'])
-    .add(current ? styles['current'] : null)
-    .add(disabled ? styles['disabled'] : null)
-    .build()
+  const inner = tv({
+    base: styles['inner'],
+    variants: {
+      current: { true: styles['current'] },
+      disabled: { true: styles['disabled'] }
+    }
+  })
 
   if (disabled) {
     return (
       <li className={styles['list-item']}>
-        <span className={innerClassname}>{children}</span>
+        <span className={inner({ disabled })}>{children}</span>
       </li>
     )
   }
@@ -31,7 +33,7 @@ function Nav({ children, href, current, disabled }: NavProps) {
   return (
     <li className={styles['list-item']}>
       <Link className={styles['anchor']} href={href}>
-        <span className={innerClassname}>{children}</span>
+        <span className={inner({ current })}>{children}</span>
       </Link>
     </li>
   )

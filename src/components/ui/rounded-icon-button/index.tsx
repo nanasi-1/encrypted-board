@@ -1,19 +1,17 @@
-import { classnameBuilder } from '@/utils/classname-builder'
-import styles from './button.module.css'
 import { Icones } from '../icons'
+import { tv } from 'tailwind-variants'
 
 export default function RoundedIconButton({ Icon, onClick, className }: {
   Icon: React.FunctionComponent<React.SVGProps<SVGSVGElement>>
   onClick?: () => void
   className?: string
 }) {
-  const _className = classnameBuilder()
-    .add(styles['button'])
-    .add(className)
-    .build()
+  const button = tv({
+    base: 'border-primary border-2 rounded-full w-14 h-14 bg-black'
+  })
     
   return (
-    <button className={_className} onClick={onClick}>
+    <button className={button({ className })} onClick={onClick}>
       <Icones Icon={Icon} fontSize={24} />
     </button>
   )
