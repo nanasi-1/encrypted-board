@@ -1,64 +1,57 @@
 import { classnameBuilder } from "@/utils/classname-builder"
 import styles from './index.module.css'
+import { tv } from "tailwind-variants"
 
 export function FormLabel({ className, ...props }
   : React.DetailedHTMLProps<React.LabelHTMLAttributes<HTMLLabelElement>, HTMLLabelElement>
 ) {
-  const _className = classnameBuilder()
-    .addByArray(['font-bold', 'text-base', 'mb-3'])
-    .addByArray(className?.split(' '))
-    .build()
-
+  const wrapper = tv({ base: 'font-bold text-base mb-3' })
   return (
-    <div className={_className}>
+    <div className={wrapper({ className })}>
       <label className="cursor-pointer" {...props} />
     </div>
   )
 }
 
-const inputBaseClass = [
-  'border-primary', 'w-full', 'border', 'px-3', 'placeholder:text-gray-200', // base
-  'transition', 'focus:outline-none', 'focus:border-secondary-400', // focus
-] as const
+const inputBase = tv({
+  base: [
+    'border-primary', 'w-full', 'border', 'px-3', 'placeholder:text-gray-200', // base
+    'transition', 'focus:outline-none', 'focus:border-secondary-400', // focus
+  ]
+})
 
 export function FormInput({ className, ...props }
   : React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 ) {
-  const _className = classnameBuilder()
-    .addByArray(inputBaseClass)
-    .add('py-2')
-    .addByArray(className?.split(' '))
-    .build()
+  const input = tv({
+    extend: inputBase,
+    base: 'py-2'
+  })
 
   return (
-    <input className={_className} {...props} />
+    <input className={input({ className })} {...props} />
   )
 }
 
 export function FormTextarea({ className, ...props }
   : React.DetailedHTMLProps<React.TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement>
 ) {
-  const _className = classnameBuilder()
-    .addByArray(inputBaseClass)
-    .addByArray(['py-2', 'h-32', 'resize-none'])
-    .addByArray(className?.split(' '))
-    .build()
+  const input = tv({
+    extend: inputBase,
+    base: 'py-2 h-32 resize-none'
+  })
 
   return (
-    <textarea className={_className} {...props} />
+    <textarea className={input({ className })} {...props} />
   )
 }
 
 export function SubmitButton({ className, ...props }
   : React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
 ) {
-  const _className = classnameBuilder()
-    .add(styles['submit-button'])
-    .addByArray(className?.split(' '))
-    .build()
-
+  const button = tv({ base: styles['submit-button'] })
   return (
-    <button type="submit" className={_className} {...props} />
+    <button type="submit" className={button({ className })} {...props} />
   )
 }
 
