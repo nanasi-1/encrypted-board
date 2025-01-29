@@ -12,12 +12,14 @@ export default function Header() {
           <li className={styles["nav-item"]}>
             <Link href="/about">初めての方はこちら</Link>
           </li>
+          {/* TODO いつか実装する
           <li className={styles["nav-item"]}>
             <Link href="/add-public">公開鍵</Link>
           </li>
           <li className={styles["nav-item"]}>
             <Link href="/add-sign">署名</Link>
-          </li>
+          </li> 
+          */}
         </ul>
       </nav>
     </header>

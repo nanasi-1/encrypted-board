@@ -35,8 +35,10 @@ export default function Footer() {
         <ul className="flex flex-col gap-y-4">
           <NavItem href="/">暗号掲示板</NavItem>
           <NavItem href="/about">初めての方はこちら</NavItem>
+          {/* TODO いつか実装する
           <NavItem href="/add-public">公開鍵と秘密鍵を生成する</NavItem>
-          <NavItem href="/add-sign">署名の検証鍵を追加する</NavItem>
+          <NavItem href="/add-sign">署名の検証鍵を追加する</NavItem> 
+          */}
         </ul>
       </div>
     </footer>
