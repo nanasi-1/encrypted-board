@@ -1,4 +1,3 @@
-import { classnameBuilder } from "@/utils/classname-builder"
 import styles from './index.module.css'
 import { tv } from "tailwind-variants"
 
@@ -58,26 +57,17 @@ export function SubmitButton({ className, ...props }
 export function FormSection({ className, ...props }
   : React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
 ) {
-  const _className = classnameBuilder()
-    .addByArray(['mb-5'])
-    .addByArray(className?.split(' '))
-    .build()
-
   return (
-    <div className={_className} {...props} />
+    <div className={tv({ base: 'mb-5' })({ className })} {...props} />
   )
 }
 
 export function ValidationError({ className, ...props }
   : React.DetailedHTMLProps<React.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>
 ) {
-  const _className = classnameBuilder()
-    .addByArray(['text-red-500', 'text-sm', 'mt-1', 'block'])
-    .addByArray(className?.split(' '))
-    .build()
-
+  const text = tv({ base: 'text-red-500 text-sm mt-1 block' })
   return (
-    <span className={_className} {...props}>
+    <span className={text({ className })} {...props}>
       ERROR: {props.children}
     </span>
   )
@@ -86,13 +76,9 @@ export function ValidationError({ className, ...props }
 export function OptionText({ className, ...props }
   : React.DetailedHTMLProps<React.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>
 ) {
-  const _className = classnameBuilder()
-    .addByArray(['text-xs', 'text-stone-400', 'mt-1'])
-    .addByArray(className?.split(' '))
-    .build()
-
+  const text = tv({ base: 'text-xs text-stone-400 mt-1' })
   return (
-    <span className={_className} {...props}>
+    <span className={text({ className })} {...props}>
       {props.children ?? '（オプション）'}
     </span>
   )
