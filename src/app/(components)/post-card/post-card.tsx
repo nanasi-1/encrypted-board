@@ -6,6 +6,7 @@ import styles from './post-card.module.css'
 import { Icones, LockIcon, MentionIcon } from '@/components/ui/icons'
 import Menus from './menus'
 import { PostData } from '@/types'
+import { useEffect, useState } from 'react'
 
 function formatCreateAt(iso: string) {
   // 手抜き工事だけど動けばいいんだよ動けば
@@ -17,10 +18,13 @@ function formatCreateAt(iso: string) {
 /** 各投稿のコンポーネント  */
 // `Post`だと投稿を意味する`post`と名前が被るので`PostCard`とした
 export default function PostCard({ post }: { post: PostData }) {
+  const [createdAt, setCreateAt] = useState('xxxx/xx/xx xx:xx:xx')
+  useEffect(() => setCreateAt(formatCreateAt(post.createdAt)), [])
+
   return (
     <div className={styles['wrapper']}>
       <div className={styles['top-line']}>
-        <span className={styles['date']}>{formatCreateAt(post.createdAt)}</span>
+        <span className={styles['date']}>{createdAt}</span>
         <span className={styles['public-key']}>
           <Icones Icon={LockIcon} position="left-of-text" />
           <Cipher color='white'>{post.publicKeyDigest}</Cipher>

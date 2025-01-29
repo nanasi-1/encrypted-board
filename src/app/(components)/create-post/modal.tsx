@@ -6,7 +6,7 @@ import { PostFormData } from "@/types";
 import { FormEventHandler, useState } from "react";
 
 function validatePlainText(text: string) {
-  const MAX_PLAIN_TEXT_LENGTH = 255
+  const MAX_PLAIN_TEXT_LENGTH = 128
 
   // 0文字（空）ならOK
   if (text.length === 0) {
