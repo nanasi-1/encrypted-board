@@ -35,7 +35,11 @@ export function openErrorWithCode(error: CustomError, openModal: (c: React.React
 
 export function ValidationError() {
   return (
-    <p>入力された値が無効です</p>
+    <ErrorModal
+      title="VALIDATION ERROR!"
+      label="入力が無効です"
+      message="入力された値が指定の形式に沿っていません"
+    />
   )
 }
 
