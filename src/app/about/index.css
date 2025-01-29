@@ -1,0 +1,16 @@
+.about {
+  line-height: 1.8;
+
+  p:not([class^="mb-"], [class^="my-"], [class^="m-"]) {
+    margin-bottom: 12px;
+  }
+
+  a:not([class]) {
+    @apply text-secondary-400;
+  }
+
+  ul:not([class]) {
+    list-style: disc;
+    @apply ml-5 mb-3;
+  }
+}
