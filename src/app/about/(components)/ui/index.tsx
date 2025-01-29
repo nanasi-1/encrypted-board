@@ -13,25 +13,39 @@ type SectionProps = HeaderProps & {
   title?: string
 }
 
+const possibleLink = tv({
+  variants: {
+    link: { true: 'cursor-pointer' }
+  }
+})
+
 export function Header2({ children, className, id }: HeaderProps) {
-  const classes = 'text-primary text-[1.7rem]'
+  const wrapper = tv({ base: 'font-bold bg-black px-7 py-2 border-b border-primary' })
+  const inline = tv({
+    extend: possibleLink,
+    base: 'text-primary text-[1.7rem]',
+  })
   return (
-    <h2 className={`font-bold bg-black px-7 py-2 border-b border-primary ${className ?? ''}`}>
+    <h2 className={wrapper({ className })}>
       {id ?
-        <a href={`#${id}`} className={`${classes} cursor-pointer`}>{children}</a> :
-        <span className={classes}>{children}</span>
+        <a href={`#${id}`} className={inline({ link: true })}>{children}</a> :
+        <span className={inline()}>{children}</span>
       }
     </h2>
   )
 }
 
 export function Header3({ children, className, id }: HeaderProps) {
-  const classes = 'text-primary font-bold text-[1.35rem] bg-black px-2 py-1.5'
+  const wrapper = tv({ base: 'text-primary font-bold text-xl mb-4' })
+  const inline = tv({
+    extend: possibleLink,
+    base: 'text-primary font-bold text-[1.35rem] bg-black px-2 py-1.5'
+  })
   return (
-    <h3 className={`text-primary font-bold text-xl mb-4 ${className ?? ''}`}>
+    <h3 className={wrapper({ className })}>
       {id ?
-        <a href={`#${id}`} className={`${classes} cursor-pointer`}>{children}</a> :
-        <span className={classes}>{children}</span>
+        <a href={`#${id}`} className={inline({ link: true })}>{children}</a> :
+        <span className={inline()}>{children}</span>
       }
     </h3>
   )
@@ -51,7 +65,7 @@ export function Section({ children, className, title, id }: SectionProps & {
   id: string
 }) {
   return (
-    <section id={id} className={`mb-10 ${className ?? ''}`}>
+    <section id={id} className={tv({ base: 'mb-10' })({ className })}>
       <Header2 id={id} className="mb-5">{title}</Header2>
       <div className="px-3 relative">
         {children}
@@ -62,7 +76,7 @@ export function Section({ children, className, title, id }: SectionProps & {
 
 export function Section2({ children, className, title, id }: SectionProps) {
   return (
-    <section id={id} className={`mb-5 ${className ?? ''}`}>
+    <section id={id} className={tv({ base: 'mb-5' })({ className })}>
       {title ? <Header3 id={id} className="mb-3">{title}</Header3> : null}
       <div className="relative">
         {children}
@@ -72,8 +86,9 @@ export function Section2({ children, className, title, id }: SectionProps) {
 }
 
 export function EffectWrapper({ children, className }: UIProps) {
+  const wrapper = tv({ base: 'absolute top-0 right-0 select-none opacity-40 -z-10' })
   return (
-    <div className={`absolute top-0 right-0 select-none opacity-40 -z-10 ${className}`}>
+    <div className={wrapper({ className })}>
       {children}
     </div>
   )
