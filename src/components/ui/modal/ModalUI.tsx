@@ -1,6 +1,6 @@
-import { classnameBuilder } from "@/utils/classname-builder"
 import { Icones, CloseIcon } from "../icons"
 import styles from './index.module.css'
+import { tv } from "tailwind-variants"
 
 export default function ModalUI({ children, onClose }: {
   children?: React.ReactNode
@@ -24,10 +24,6 @@ export default function ModalUI({ children, onClose }: {
 export function ModalTitle({ className, ...props }
   : React.DetailedHTMLProps<React.HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>
 ) {
-  const _className = classnameBuilder()
-    .addByArray(['text-primary', 'font-bold', 'text-xl', 'mb-3'])
-    .addByArray(className?.split(' '))
-    .build()
-
-  return <h2 className={_className} {...props} />
+  const title = tv({ base: 'text-primary font-bold text-xl mb-3' })
+  return <h2 {...props} className={title({ className })} />
 }
