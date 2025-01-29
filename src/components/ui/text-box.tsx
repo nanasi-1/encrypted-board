@@ -1,5 +1,5 @@
-import { classnameBuilder } from "@/utils/classname-builder"
 import Cipher from "./cipher"
+import { tv } from "tailwind-variants"
 
 export function CipherBox({ children, className, cipherColor, boxColor }: {
   children?: React.ReactNode
@@ -7,15 +7,15 @@ export function CipherBox({ children, className, cipherColor, boxColor }: {
   cipherColor?: string
   boxColor?: string
 }) {
-  const boxClassname = classnameBuilder()
-    .addByArray(['border', 'px-3', 'py-2'])
-    .add(`border-${boxColor ?? 'primary'}`)
-    .addByArray(['break-words', 'overflow-y-scroll'])
-    .add(className)
-    .build()
+  const box = tv({
+    base: [
+      'border px-3 py-2 break-words overflow-y-scroll',
+      `border-${boxColor ?? 'primary'}`
+    ]
+  })
 
   return (
-    <div className={boxClassname}>
+    <div className={box({ className })}>
       <Cipher color={cipherColor ?? 'white'}>{children}</Cipher>
     </div>
   )
@@ -26,14 +26,12 @@ export function TextBox({ children, color, className }: {
   color?: string
   className?: string
 }) {
-  const _classname = classnameBuilder()
-    .addByArray(['border', 'px-3', 'py-2'] as const)
-    .add(`border-${color ?? 'primary'}`)
-    .add(className)
-    .build()
+  const box = tv({
+    base: ['border px-3 py-2', `border-${color ?? 'primary'}`]
+  })
 
   return (
-    <div className={_classname}>
+    <div className={box({ className })}>
       {children}
     </div>
   )

@@ -1,4 +1,0 @@
-.button {
-  /* base */
-  @apply border-primary border-2 rounded-full w-14 h-14 bg-black;
-}

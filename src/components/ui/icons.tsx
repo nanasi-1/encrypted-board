@@ -1,5 +1,5 @@
-import { classnameBuilder } from "@/utils/classname-builder";
 import { SVGProps } from "react";
+import { tv } from "tailwind-variants";
 
 // by https://icones.js.org/collection/all
 
@@ -8,20 +8,19 @@ export function Icones({ Icon, color, position, ...props }: SVGProps<SVGSVGEleme
   color?: string
   position?: 'left-of-text'
 }) {
-  const classname = classnameBuilder()
-    .add('inline-block')
-    .add(`text-${color ?? 'primary'}`)
-    .add('mb-0.5')
-    .addByArray(props.className?.split(' '))
-    .build()
+  const icon = tv({
+    base: ['inline-block mb-0.5', `text-${color ?? 'primary'}`]
+  })
 
-  const wrapperClassname = classnameBuilder()
-    .add(position === 'left-of-text' ? 'pr-1' : '')
-    .build()
+  const wrapper = tv({
+    variants: {
+      position: { 'left-of-text': 'pr-1' }
+    }
+  })
 
   return (
-    <span className={wrapperClassname}>
-      <Icon {...props} className={classname} />
+    <span className={wrapper({ position })}>
+      <Icon {...props} className={icon({ class: props.className })} />
     </span>
   )
 }

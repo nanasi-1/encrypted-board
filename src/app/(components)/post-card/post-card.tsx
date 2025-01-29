@@ -1,3 +1,6 @@
+'use client'
+// 日付の表示はクライアントコンポーネントにする
+
 import Cipher from '@/components/ui/cipher'
 import styles from './post-card.module.css'
 import { Icones, LockIcon, MentionIcon } from '@/components/ui/icons'
