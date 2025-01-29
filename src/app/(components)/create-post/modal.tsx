@@ -75,6 +75,7 @@ export default function PostModal({ onSubmit }: {
             placeholder="暗号化に使う公開鍵を入力..."
           />
         </FormSection>
+        {/* TODO 署名を実装する
         <FormSection>
           <FormLabel htmlFor="post-sign-key">
             署名鍵<OptionText />
@@ -86,6 +87,7 @@ export default function PostModal({ onSubmit }: {
             placeholder="署名鍵を入力..."
           />
         </FormSection>
+        */}
         <hr className="my-8 border-gray-400" />
         <SubmitButton disabled={!!error || nowPosted}>
           {nowPosted ? '投稿中...' : '投稿'}
