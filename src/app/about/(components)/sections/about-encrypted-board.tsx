@@ -27,7 +27,7 @@ export default function AboutEncryptedBoard() {
         また、自分で暗号文を投稿することも可能です。<br />
         投稿の平文は自由な文章を入力でき、暗号化されて保存されます。<br />
       </p>
-      <div className="leading-6 w-11/12 mb-5">
+      <div className="leading-6 mb-5">
         <PostCard post={dummyPost} />
       </div>
       <p>

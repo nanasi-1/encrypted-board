@@ -15,7 +15,7 @@ export default function Introduction() {
         <p className="mb-2">暗号掲示板をご覧いただき、誠にありがとうございます。</p>
         <p>
           当掲示板を使うには<ColorStrong>公開鍵暗号</ColorStrong>の知識が必要となります。<br />
-          この暗号方式について知っていただくため、ぜひこのページをご一読ください。<br />
+          暗号掲示板の利用方法について知っていただくため、ぜひこのページをご一読ください。<br />
         </p>
       </div>
     </section>
