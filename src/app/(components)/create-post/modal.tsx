@@ -6,7 +6,7 @@ import { PostFormData } from "@/types";
 import { FormEventHandler, useState } from "react";
 
 function validatePlainText(text: string) {
-  const MAX_PLAIN_TEXT_LENGTH = 255
+  const MAX_PLAIN_TEXT_LENGTH = 128
 
   // 0文字（空）ならOK
   if (text.length === 0) {
@@ -59,7 +59,7 @@ export default function PostModal({ onSubmit }: {
             value={value}
             onChange={handleChange}
             required
-            placeholder="投稿したいメッセージを入力..."
+            placeholder="暗号として投稿する平文を入力..."
             className={error ? 'border-red-500' : ''}
             autoFocus
           />
@@ -72,9 +72,10 @@ export default function PostModal({ onSubmit }: {
             name="public-key"
             type="text"
             required
-            placeholder="暗号化に使う公開鍵を入力..."
+            placeholder="暗号化に使用する公開鍵を入力..."
           />
         </FormSection>
+        {/* TODO 署名を実装する
         <FormSection>
           <FormLabel htmlFor="post-sign-key">
             署名鍵<OptionText />
@@ -86,6 +87,7 @@ export default function PostModal({ onSubmit }: {
             placeholder="署名鍵を入力..."
           />
         </FormSection>
+        */}
         <hr className="my-8 border-gray-400" />
         <SubmitButton disabled={!!error || nowPosted}>
           {nowPosted ? '投稿中...' : '投稿'}

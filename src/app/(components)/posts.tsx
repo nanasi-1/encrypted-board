@@ -17,7 +17,7 @@ export default async function Posts({ currentPage }: {
   }
 
   return (
-    <div className="flex items-center flex-col gap-y-7 px-[10%]">
+    <div className="flex items-center flex-col gap-y-7">
       {result.posts.map(post => (
         <PostCard key={post.id} post={post} />
       ))}
