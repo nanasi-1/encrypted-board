@@ -1,6 +1,23 @@
 import { Icones, LockIcon } from "@/components/ui/icons";
 import FixedButtons from "./(components)/fixed-buttons";
 import Posts from "./(components)/posts";
+import Cipher from "@/components/ui/cipher";
+
+function Introduction() {
+  return (
+    <div className="border border-primary bg-black mb-8 px-8 py-5">
+      <Cipher className="block mb-1">
+        $ node ./index.js <br />
+        &gt; 暗号掲示板へようこそ<br />
+      </Cipher>
+      <Cipher className="block">
+        $ curl -X GET {process.env['URL']}/api/posts <br />
+        {/* TODO 遅延実装する &gt; 投稿を取得しています...<br /> */}
+        &gt; 投稿の取得が完了しました
+      </Cipher>
+    </div>
+  )
+}
 
 export default async function Home({ searchParams }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>,
@@ -10,19 +27,10 @@ export default async function Home({ searchParams }: {
 
   return (
     <>
-      <div className="justify-center flex items-center flex-col gap-y-4 mb-12">
-        <div className="bg-black px-3 py-1">
-          <h1 className="text-center text-3xl font-bold text-primary">Hello World!</h1>
-        </div>
-        <p>
-          <Icones Icon={LockIcon} color="primary" position="left-of-text" />
-          <span>暗号掲示板は現在準備中です</span>
-        </p>
-        <p>
-          <a href="https://github.com/nanasi-1/encrypted-board" target="_blank" className="text-secondary underline">GitHub</a>
-        </p>
+      <div className="px-[10%]">
+        <Introduction />
+        <Posts currentPage={currentPage} />
       </div>
-      <Posts currentPage={currentPage} />
       <FixedButtons />
     </>
   );
