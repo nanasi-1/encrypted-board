@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "暗号掲示板",
-  description: "暗号しか投稿できない匿名掲示板",
+  description: "暗号しか投稿できない匿名掲示板です。誰でも公開鍵暗号を使った暗号化を体験できます。",
   openGraph: {
     images: [{
       url: `${process.env.URL}/OGP.png`,
