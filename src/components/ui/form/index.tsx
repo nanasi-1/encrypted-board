@@ -37,7 +37,7 @@ export function FormTextarea({ className, ...props }
 ) {
   const input = tv({
     extend: inputBase,
-    base: 'py-2 h-32 resize-none'
+    base: 'py-2 h-20 resize-none'
   })
 
   return (
